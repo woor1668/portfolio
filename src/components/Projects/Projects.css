@@ -1,0 +1,238 @@
+.pr-wp {
+    background-color: #121212;
+}
+
+.title.pr-tt {
+    color: white;
+}
+
+.title.pr-tt::after {
+    background: rgb(154, 201, 255);
+}
+  
+.project-section {
+    overflow: hidden;
+    background-color: white;
+    color: #333;
+    height: 650px;
+    padding: 5px 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 50px;
+}
+
+.project-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+
+.text-content {
+    flex: 1;
+    padding-right: 30px;
+    text-align: left;
+    font-size: 1.2em;
+    color: #333;
+    z-index: 2;
+    position: relative;
+    padding: 20px;
+    word-break: keep-all;
+}   
+
+.text-content h3 {
+    margin-top: 20px;
+}
+
+.text-content h4 {
+    margin: 20px 0px 10px;
+}
+
+.project-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.project-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 9px;
+    background: rgb(154, 201, 255);
+    margin: 15px auto 15px 0;
+    text-align: left;
+}
+
+.project-p {
+    margin-top: 0px;
+    color: #666;
+    line-height: 1.6;
+    font-size: 1em;
+}
+
+.tech-badge {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.feat-badge {
+    display: block;
+    padding: 2px;
+    font-size: 1em;
+}
+
+.text-content .ft-hd {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.ft-bd h4 {
+    margin-top: 20px;
+}
+
+.ft-bd {
+    margin-top: 10px;
+}
+
+.image-content {
+    position: relative;
+    width: 60%;
+    height: 600px;
+    overflow: hidden;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+@media (max-width: 768px) {
+    .project-section {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .project-content {
+        flex-direction: column;
+    }
+
+    .text-content {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .project-title {
+        font-size: 2rem;
+    }
+
+    .project-title::after {
+        width: 40px;
+        height: 6px;
+        margin: 10px auto;
+    }
+
+    .text-content h4 {
+        font-size: 1.5rem;
+    }
+
+    .project-p {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+
+    .image-content {
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .project-image {
+        max-width: 90%;
+        max-height: 300px;
+    }
+}
+
+/* 태블릿 설정 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .project-section {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+
+    .project-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-content {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .project-title {
+        font-size: 2.3rem;
+    }
+
+    .text-content h4 {
+        font-size: 1.7rem;
+    }
+
+    .project-p {
+        font-size: 1em;
+        line-height: 1.5;
+    }
+
+    .image-content {
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .project-image {
+        max-width: 100%;
+        max-height: 400px;
+    }
+}
+
+/* 데스크탑 고해상도 설정 */
+@media (min-width: 1440px) {
+    .project-section {
+        padding: 40px 60px;
+    }
+
+    .project-title {
+        font-size: 3rem;
+    }
+
+    .text-content h4 {
+        font-size: 2rem;
+    }
+
+    .project-p {
+        font-size: 1.1em;
+        line-height: 1.8;
+    }
+
+    .image-content {
+        width: 55%;
+    }
+
+    .project-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}

@@ -1,0 +1,121 @@
+/* 기본 스타일 설정 */
+html, body {
+  scroll-behavior: smooth;  /* 부드러운 스크롤 */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+  font-family: 'Pretendard-Regular'
+}
+
+
+/* 컨테이너 스타일 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  scroll-snap-type: y mandatory;
+  gap: 0;
+}
+
+/* 섹션 스타일 */
+section {
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+}
+
+/* FullPage.js 네비게이션 제거 */
+.fp-watermark, .fp-nav {
+  display: none !important;
+}
+
+.wrapper{
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1250px;
+  margin: 50px 0px 100px 0px;
+  text-align: center;
+}
+
+.title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgb(20, 14, 68);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 9px;
+  background: rgb(57, 57, 192);
+  margin: 10px auto 20px;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.scroll-to-top:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.scroll-to-top:active {
+  background-color: #004494;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    transform: translateX(-50%);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .scroll-to-top:hover {
+    background-color: #0066cc;
+    /* 위치를 고정하고 확대 효과만 유지 */
+    transform: translateX(-50%);
+  }
+
+  .scroll-to-top:active {
+    background-color: #004494;
+  }
+}
