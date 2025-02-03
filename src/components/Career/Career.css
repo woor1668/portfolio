@@ -120,7 +120,6 @@ li {
     color: #555;
     margin-bottom: 5px;
     font-size: 0.8em;
-    word-break: keep-all;
     white-space: normal; 
 }
 
@@ -174,7 +173,7 @@ li {
 
     .tech-section {
         min-width: 100%;
-        padding: 15px;
+        padding: 15px 0px;
     }
 
     .year-circle {

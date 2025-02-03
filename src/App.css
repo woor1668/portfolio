@@ -4,7 +4,8 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* 가로 스크롤 방지 */
-  font-family: 'Pretendard-Regular'
+  font-family: 'Pretendard-Regular';
+  word-break: keep-all;
 }
 
 
@@ -98,6 +99,10 @@ section {
 }
 
 @media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+
   .scroll-to-top {
     position: fixed;
     left: 50%;
