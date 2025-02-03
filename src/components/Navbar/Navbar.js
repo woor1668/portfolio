@@ -22,10 +22,10 @@ const Navbar = () => {
 
         {/* 네비게이션 메뉴 */}
         <ul className={`navbar-menu ${menuOpen ? "active" : ""}`}>
-          <li><a href="#about">About Me</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about" onClick={toggleMenu}>About Me</a></li>
+          <li><a href="#skills" onClick={toggleMenu}>Skills</a></li>
+          <li><a href="#career" onClick={toggleMenu}>Career</a></li>
+          <li><a href="#projects" onClick={toggleMenu}>Projects</a></li>
         </ul>
       </div>
     </nav>
