@@ -8,7 +8,7 @@ const About = () => {
         <h2 className="title">About Me</h2>
         <div className="about-content">
           <div className="image-container">
-            <img src="/3.png" alt="Profile" className="profile-image" /> 
+            <img src="/profile.png" alt="Profile" className="profile-image" /> 
             <p className="name">
               이 재 봉 <span className="job-title">Web Developer</span>
             </p>

@@ -27,7 +27,7 @@ const Hero = () => {
           className="bg-video__content" 
           loop autoPlay muted playsInline 
           onCanPlay={handleVideoLoad}>
-          <source src="hero/mount.mp4" type="video/mp4" />
+          <source src="hero/mount_small.mp4" type="video/mp4" />
         </video>
       </div>
 
