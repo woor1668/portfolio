@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { FaAngleDoubleDown } from "react-icons/fa";
 import "./Hero.css";
 
 const Hero = () => {
@@ -49,6 +50,16 @@ const Hero = () => {
         >
           <h2 className="hero-title">이재봉입니다</h2>
         </motion.div>
+      </div>
+
+      <div
+        className="scroll-down-indicator"
+        style={{ opacity: scrollY < 100 ? 1 : 0 }}
+      >
+        <div className="mouse">
+          <div className="scroll"></div>
+        </div>
+        <FaAngleDoubleDown />
       </div>
 
       {/* 배경 동영상 */}
