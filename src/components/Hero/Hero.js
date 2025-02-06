@@ -1,66 +1,66 @@
-import React, { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import "./Hero.css";
 
 const Hero = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [textCompleted, setTextCompleted] = useState(false);
-  const controls = useAnimation();
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.5 });
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [inView, controls]);
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const handleVideoLoad = () => {
-    setVideoLoaded(true);
+  const viewportHeight = window.innerHeight;
+  const fadeOutPoint = 2 * viewportHeight; // 200vh
+
+  // Hero 전체 섹션의 opacity 제어 (마지막에 사라지게 설정)
+  const getHeroOpacity = () => {
+    return (scrollY >= fadeOutPoint) ? 0: 1 ;// Hero가 완전히 사라지는 시점
   };
 
-  const variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.4, duration: 0.8 },
-    }),
-  };
+  // 각 텍스트가 나타나는 시점을 결정
+  const getTextVisibility = (start) => (scrollY >= start ? 1 : 0);
 
   return (
-    <div className={`hero-wrapper ${textCompleted ? "video-visible" : ""}`} ref={ref}>
-      <div className="vidio-container">
-        <video 
-          className="bg-video__content" 
-          loop autoPlay muted playsInline 
-          onCanPlay={handleVideoLoad}>
-          <source src="hero/mount_small.mp4" type="video/mp4" />
-        </video>
+    <motion.div
+      className="hero-wrapper"
+      style={{ opacity: getHeroOpacity() }}
+    >
+      {/* 중앙 고정된 텍스트 */}
+      <div className="hero-container">
+        <motion.div
+          className="hero-box font-shadow"
+          style={{ opacity: getTextVisibility(100) }}
+        >
+          <h1 className="hero-subtitle">Welcome to my Portfolio</h1>
+        </motion.div>
+
+        <motion.div
+          className="hero-box font-b"
+          style={{ opacity: getTextVisibility(400) }}
+        >
+          <h2 className="hero-title">사람과 사람을 연결하는 개발자</h2>
+        </motion.div>
+
+        <motion.div
+          className="hero-box font-shadow"
+          style={{ opacity: getTextVisibility(700) }}
+        >
+          <h2 className="hero-title">이재봉입니다</h2>
+        </motion.div>
       </div>
 
+      {/* 배경 동영상 */}
       <motion.div
-        className="hero-container"
-        initial="hidden"
-        animate={controls}
-        variants={{
-          visible: { transition: { staggerChildren: 0.3 } },
-        }}
-        onAnimationComplete={() => setTextCompleted(true)}
+        className="vidio-container"
+        style={{ opacity: getTextVisibility(1000) }}
       >
-        <motion.div className="hero-box">
-          <motion.div className="hero-subtitle" custom={0} variants={variants}>
-            Welcome to my Portfolio
-          </motion.div>
-          <motion.div className="hero-title font-b" custom={1} variants={variants}>
-            사람과 사람을 연결하는 개발자
-          </motion.div>
-          <motion.div className="hero-title" custom={2} variants={variants}>
-            이재봉입니다
-          </motion.div>
-        </motion.div>
+        <video className="bg-video__content" loop autoPlay muted playsInline>
+          <source src="hero/mount_small.mp4" type="video/mp4" />
+        </video>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

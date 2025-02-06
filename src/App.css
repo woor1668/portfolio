@@ -86,7 +86,8 @@ section {
   font-size: 20px;
   cursor: pointer;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.3s;
+  opacity: 0;
+  transition: opacity 1s, transform 1s;
 }
 
 .scroll-to-top:hover {
@@ -96,6 +97,19 @@ section {
 
 .scroll-to-top:active {
   background-color: #004494;
+}
+
+/* 초기 상태 (섹션이 숨겨져 있을 때) */
+.section-hidden {
+  opacity: 0;
+  transform: translateY(80px);  /* 충분히 아래에 위치 */
+  transition: opacity 1s ease, transform 1s ease;  /* 부드러운 전환 */
+}
+
+/* 뷰포트에 진입 시 위로 올라오면서 보이기 */
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);  /* 원래 위치 */
 }
 
 @media (max-width: 768px) {
@@ -111,7 +125,6 @@ section {
     height: 40px;
     font-size: 12px;
     transform: translateX(-50%);
-    transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
   .scroll-to-top:hover {
@@ -123,4 +136,5 @@ section {
   .scroll-to-top:active {
     background-color: #004494;
   }
+
 }
