@@ -5,11 +5,15 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: background-color 1s ease;
+    transition: background-color 1s ease, opacity 2s ease;
 }
 
-.hero-wrapper:not(.video-loaded) {
-    background-color: #72a2db;
+.hero-wrapper.video-visible .vidio-container {
+    opacity: 1;
+}
+
+.hero-wrapper:not(.video-visible) .vidio-container {
+    opacity: 0;
 }
 
 .vidio-container {
@@ -19,6 +23,7 @@
     object-fit: cover;
     z-index: -1;
     background-color: #72a2db;
+    transition: opacity 2s ease;
 }
 
 .bg-video__content {
@@ -32,7 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1; /* 텍스트가 비디오 위에 보이도록 설정 */
+    z-index: 1;
 }
 
 .hero-box {
