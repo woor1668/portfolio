@@ -10,10 +10,14 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0); 
+  };
+
   return (
     <nav className="navbar">
       <div className="navi-container">
-        <div className="navbar-logo">JB WORKS</div>
+        <div className="navbar-logo" onClick={scrollToTop}>JB WORKS</div>
 
         {/* 햄버거 버튼 */}
         <div className="hamburger-icon" onClick={toggleMenu}>

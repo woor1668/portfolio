@@ -99,22 +99,14 @@ section {
   background-color: #004494;
 }
 
-/* 초기 상태 (섹션이 숨겨져 있을 때) */
-.section-hidden {
-  opacity: 0;
-  transform: translateY(80px);  /* 충분히 아래에 위치 */
-  transition: opacity 1s ease, transform 1s ease;  /* 부드러운 전환 */
-}
-
-/* 뷰포트에 진입 시 위로 올라오면서 보이기 */
-.section-visible {
+.slide-up-visible {
   opacity: 1;
-  transform: translateY(0);  /* 원래 위치 */
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
   .container {
-    max-width: 100%;
+    width: 100%;
   }
 
   .scroll-to-top {

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './Projects.css';
 import { projectsData } from './ProjectsData';
+import useVisibilityObserver from '../../hooks/useVisibilityObserver';
 
 const Projects = () => {
   const sliderSettings = {
@@ -15,12 +16,27 @@ const Projects = () => {
     arrows: true
   };
 
+  const titleRef = useRef(null);
+  const projectRefs = useRef(projectsData.map(() => React.createRef()));
+      
+  const isVisible = useVisibilityObserver({
+      title: titleRef,
+      ...projectRefs.current.reduce((acc, ref, idx) => {
+        acc[`project${idx}`] = ref;
+        return acc;
+      }, {}),
+  }, 0.1);
+
   return (
-    <div className="wrapper pr-wp">
+    <div className="wrapper pr-wp"> 
       <div className="container">
-        <h2 className="title pr-tt">Projects</h2>
+      <h2 ref={titleRef} className={`title pr-tt ${isVisible.title ? "slide-up-visible" : ""}`}>Projects</h2>
         {projectsData.map((project, projectIndex) => (
-          <div key={projectIndex} className="project-section">
+          <div
+            key={projectIndex} 
+            ref={projectRefs.current[projectIndex]}
+            className={`project-section ${isVisible[`project${projectIndex}`] ? "slide-up-visible" : ""}`}
+          >
             <Slider {...sliderSettings}>
               {project.slides.map((slide, slideIndex) => (
                   <div key={slideIndex} className="project-slide">

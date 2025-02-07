@@ -22,6 +22,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: rgb(20, 14, 68);
+    cursor: pointer;
   }
   
   .navbar-menu {

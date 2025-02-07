@@ -13,6 +13,15 @@ const App = () => {
   const [showOpacity, setShowOpacity] = useState(0);
 
   useEffect(() => {
+    const html = document.documentElement;
+    html.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    if(window.scrollY == 0){
+      html.style.scrollBehavior = "smooth"; 
+    }
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const aboutSection = document.getElementById("about");
       if (aboutSection && window.scrollY >= aboutSection.offsetTop - 900) {
@@ -25,30 +34,6 @@ const App = () => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const sections = document.querySelectorAll("section:not(#hero)");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("section-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.01 }
-    );
-
-    sections.forEach((section) => {
-      section.classList.add("section-hidden");  // 초기에 숨기기
-      observer.observe(section);
-    });
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section));
     };
   }, []);
 

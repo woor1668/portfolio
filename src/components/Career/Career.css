@@ -6,9 +6,11 @@
     background-color: rgb(35, 107, 35);
 }
 
-.layout-wrapper {
+.career-container {
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
+    border-radius: 12px;
     background-color: white;
 }
 
@@ -24,6 +26,7 @@
     border-radius: 8px 0 0 8px;
     border-right: 2px solid rgba(0, 0, 0, 0.1);
     color: #444;
+    flex: 1;
 }
 
 .company-section h2 {
@@ -38,7 +41,6 @@
 
 /* 경력 섹션 스타일 */
 .career-wrapper {
-    min-width: 910px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -74,7 +76,7 @@
     flex: 1; /* 유연한 크기 조정 */
 }
 
-.career-year-section h3 {
+.year {
     background-color: #58bb54;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
     color: white;
@@ -123,17 +125,32 @@ li {
     white-space: normal; 
 }
 
+.company-section > *,
+.year,
+.tech-section,
+.ca-tt {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}  
 
-/* 반응형 설정 */
-@media (max-width: 1024px) {
-    .career-wrapper {
-        padding: 0;
-    }
-    
-    .layout-wrapper {
+.year:nth-of-type(1) {
+    transition-delay: 0.2s;
+}
+
+.tech-section:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.tech-section:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+@media (max-width: 768px) {    
+    .career-container {
         flex-direction: column;
     }
-
+    
     .company-section {
         text-align: center;
         padding: 20px;
@@ -141,19 +158,6 @@ li {
         border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     }
 
-    .career-wrapper {
-        min-width: 100%;
-    }
-
-    .year-circle {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .career-wrapper {
-        padding: 0;
-    }
     .company-section h2 {
         font-size: 1.8em;
     }
@@ -162,21 +166,71 @@ li {
         font-size: 1.2em;
     }
 
-    .career-year-section {
-        min-width: 100%;
-        padding: 15px 0px;
+    .career-wrapper {
+        padding: 0;
+    }
+    
+    .year {
+        padding: 10px;
+        font-size: 0.8em;
     }
 
-    .career-year-section h3 {
-        font-size: 0.9em;
+    .tech-row { 
+        flex-direction: column;
     }
 
     .tech-section {
-        min-width: 100%;
-        padding: 15px 0px;
+        padding: 10px;
+    }
+
+    .career-details h4 {
+        font-size: 1em;
+    }
+
+    li {
+        font-size: 0.7em;
     }
 
     .year-circle {
         display: none;
+    }
+
+    .year:nth-of-type(1) {
+        transition-delay: 0s;
+    }
+
+    .tech-section:nth-child(2) {
+        transition-delay: 0s;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-section {
+        padding: 10px;
+    }
+
+    .company-section h2 {
+        font-size: 1.5em;
+    }
+
+    .company-section span {
+        font-size: 1em;
+    }
+
+    .year {
+        padding: 8px;
+        font-size: 0.7em;
+    }
+
+    .tech-section {
+        padding: 8px;
+    }
+
+    .career-details h4 {
+        font-size: 0.9em;
+    }
+
+    li {
+        font-size: 0.65em;
     }
 }

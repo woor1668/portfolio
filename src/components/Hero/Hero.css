@@ -6,7 +6,7 @@
     align-items: center;
     background-color: #72a2db;
     position: relative;
-    transition: opacity 1.5s ease;
+    transition: opacity 1s ease;
     /* will-change: transform; */
 }
 
@@ -159,27 +159,6 @@
     font-weight: 300;
     font-style: normal;
     }
-
-    /* 반응형 설정 */
-@media screen and (max-width: 1024px) {
-    .hero-box {
-        width: 100%;
-        height: auto;
-    }
-
-    .hero-title {
-        font-size: 4rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.5rem;
-        margin-top: 80px;
-    }
-
-    .hero-description {
-        font-size: 1rem;
-    }
-}
 
 @media screen and (max-width: 768px) {
     .hero-container {
