@@ -27,11 +27,6 @@ section {
   scroll-snap-align: start;
 }
 
-/* FullPage.js 네비게이션 제거 */
-.fp-watermark, .fp-nav {
-  display: none !important;
-}
-
 .wrapper{
   display: flex;
   align-items: start;
