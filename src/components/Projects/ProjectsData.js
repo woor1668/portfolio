@@ -199,11 +199,71 @@ export const projectsData = [
         {
         featureHeader: "포트폴리오",
         features: [
-          "⦁ 풀페이지",
-          "- 풀페이지로 만든 포트폴리오 사이트",
+          "⦁ 포트폴리오",
+          "- 리액트로 만든 포트폴리오 사이트",
           "- 나의 기술, 경력, 경험을 작성"
         ],
         image: "/projects/p1.png"
+      },
+      ]
+    }, {
+      slides: [
+        {
+          title: "AIBOM",
+          date: "2025-03-14 ~ 04-11",
+          people: "5명 - 기여도 100%(설계 및 개발)",
+          featureHeader: "주요 기능",
+          features: [
+              "⦁ 메인페이지",
+              "⦁ 커뮤니티 페이지",
+              "⦁ 마이페이지",
+              "⦁ 리포트 페이지",
+          ],
+          techStack: ["React", "TypeScript", "supabase", "MariaDB"],
+          image: "/projects/aibom1.png"
+        },
+        {
+        featureHeader: "AIBOM",
+        features: [
+          "⦁ 메인페이지",
+          "- 영ㆍ유아 행동발달 측정 AI 사이트",
+          "- 행동발달 - K-DST, 유아관찰 - KICCE 기반 측정",
+          "- 미 측정 시 잠금, 해당 월 미측정 시 측정하기 버튼 활성화",
+          "- 월 1회 측정 및 성장곡선 확인"
+        ],
+        image: "/projects/aibom2.png"
+      },
+      {
+        featureHeader: "AIBOM",
+        features: [
+          "⦁ 커뮤니티",
+          "- 영ㆍ유아 발달 측정만으로 고객 유치가 힘들다 판단하여 커뮤니티 페이지 추가",
+          "- 보호자 간의 소통을 유도하여 고객 유치 목적",
+          "- 최신순, 인기순으로 조회 및 검색 기능",
+          "- 댓글, 답글, 좋아요 기능 등 커뮤니티 기능",
+        ],
+        image: "/projects/aibom3.png"
+      },
+      {
+        featureHeader: "AIBOM",
+        features: [
+          "⦁ 마이페이지",
+          "- 소셜로그인으로 로그인 간편화",
+          "- 마이페이지 내에 이미지, 자기소개 수정",
+          "- 아이 추가 버튼으로 다자녀 등록",
+          "- 나이, 이름, 성별 순으로 정렬",
+        ],
+        image: "/projects/aibom4.png"
+      },
+      {
+        featureHeader: "AIBOM",
+        features: [
+          "⦁ 리포트",
+          "- 측정한 점수들을 기반으로 리포트 작성",
+          "- openAI API를 활용하여 리포트 내용 자동 완성",
+          "- 육아 전문가 agent 등을 추가하여 오류 최소화",
+        ],
+        image: "/projects/aibom5.png"
       },
       ]
     }
