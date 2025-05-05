@@ -266,5 +266,63 @@ export const projectsData = [
         image: "/projects/aibom5.png"
       },
       ]
+    }, {
+      slides: [
+        {
+          title: "깜빡Catch",
+          date: "2025-04-14 ~ 05-9",
+          people: "4명 - 기여도 100%(PM, 웹개발)",
+          featureHeader: "주요 기능",
+          features: [
+              "⦁ 메인페이지",
+              "⦁ 다국어 기능",
+              "⦁ 관리자 페이지",
+              "⦁ 앱 연동",
+          ],
+          techStack: ["React", "TypeScript", "supabase"],
+          image: "/projects/Kkam1.png"
+        },
+        {
+        featureHeader: "깜빡Catch",
+        features: [
+          "⦁ 메인페이지",
+          "- 무인매장 이상현상 알림 프로젝트",
+          "- 프로젝트 및 제품 소개",
+          "- 신규 가입자 및 기존 가입자 이용 사이트",
+        ],
+        image: "/projects/Kkam2.png"
+      },
+      {
+        featureHeader: "깜빡Catch",
+        features: [
+          "⦁ 다국어",
+          "- 다국어 기능으로 다양한 언어 지원",
+          "- 한국어, 영어, 일본어, 중국어 선택 가능",
+          "- 회원가입 페이지까지 다국어 처리",
+        ],
+        image: "/projects/Kkam3.png"
+      },
+      {
+        featureHeader: "깜빡Catch",
+        features: [
+          "⦁ 관리자페이지",
+          "- 신규 가입자 또는 기존 이용자 매장 변경 시 관리 용이",
+          "- 관리자 승인 하에 앱 이용 가능",
+          "- 승인, 미승인 버튼 클릭으로 상태값 변경",
+        ],
+        image: "/projects/Kkam4.png"
+      },
+      {
+        featureHeader: "깜빡Catch",
+        features: [
+          "⦁ 모바일",
+          "- 실시간으로 카메라 송출",
+          "- 고객 얼굴 블라인드 처리",
+          "- 고객의 체류 시간 등 확인가능",
+          "- 이상현상 발생 시 알림기능",
+        ],
+        image: "/projects/Kkam5.png"
+      },
+      ]
     }
   ];
