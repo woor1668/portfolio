@@ -10,7 +10,7 @@ export const companyData = [
     {
       year: "2021.10 - 2022.09",
       main: [
-        "대학 NCS 프로그램 오류 수정 및 개발",
+        "대학 NCS(국가직무능력표준) 프로그램 오류 수정 및 개발",
         "대학 NCS 서버 유지보수 및 개발",
         "OZ report 유지보수 및 개발",
       ],
