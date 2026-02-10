@@ -16,7 +16,7 @@ const App = () => {
     const html = document.documentElement;
     html.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
-    if(window.scrollY == 0){
+    if(window.scrollY === 0){
       html.style.scrollBehavior = "smooth"; 
     }
   }, []);

@@ -1,15 +1,400 @@
+/* ===== Hero Wrapper ===== */
 .hero-wrapper {
     width: 100%;
-    height: 300vh; 
-    /* display: flex; */
+    height: 300vh;
     justify-content: center;
     align-items: center;
-    background-color: #72a2db;
     position: relative;
     transition: opacity 1s ease;
-    /* will-change: transform; */
+    background: #0b0e1a;
 }
 
+/* ===== CSS Background Layers ===== */
+.hero-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Sky gradient — 서서히 색상 순환 */
+.hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        #0b0e1a 0%,
+        #121833 15%,
+        #1a2650 30%,
+        #2d4a7a 50%,
+        #4a7ab5 65%,
+        #7faed4 78%,
+        #c4a882 88%,
+        #e8a455 94%,
+        #d4723c 100%
+    );
+    animation: skyPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes skyPulse {
+    0% {
+        filter: brightness(1) saturate(1) hue-rotate(0deg);
+    }
+    33% {
+        filter: brightness(1.08) saturate(1.15) hue-rotate(-5deg);
+    }
+    66% {
+        filter: brightness(0.95) saturate(1.05) hue-rotate(3deg);
+    }
+    100% {
+        filter: brightness(1.03) saturate(0.9) hue-rotate(-2deg);
+    }
+}
+
+/* ===== Stars — 2 layers for parallax depth ===== */
+.hero-stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 10% 10%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 25% 5%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.5px 1.5px at 40% 15%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 55% 8%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 70% 18%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 85% 3%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 60% 22%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 90% 12%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 35% 30%, rgba(255,255,255,0.3), transparent);
+    animation: twinkle1 3s ease-in-out infinite alternate;
+}
+
+.hero-stars--layer2 {
+    background-image:
+        radial-gradient(1.5px 1.5px at 5% 20%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 20% 35%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(2px 2px at 32% 8%, rgba(200,220,255,0.9), transparent),
+        radial-gradient(1px 1px at 48% 28%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1.5px 1.5px at 65% 5%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 78% 25%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 92% 18%, rgba(200,220,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 50% 2%, rgba(255,255,255,0.7), transparent);
+    animation: twinkle2 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle1 {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+@keyframes twinkle2 {
+    0% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+    100% { opacity: 0.9; }
+}
+
+/* ===== Shooting Stars (유성) — 오른쪽 위 → 왼쪽 아래 ===== */
+.shooting-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: shoot var(--meteor-duration, 1.2s) ease-out forwards;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
+}
+
+.shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: var(--meteor-tail, 100px);
+    height: 1.5px;
+    background: linear-gradient(270deg, rgba(255,255,255,0.8), rgba(180,210,255,0.3), transparent);
+    transform-origin: right center;
+    transform: translateY(-50%) rotate(140deg);
+}
+
+@keyframes shoot {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+    10% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-350px, 280px);
+    }
+}
+
+/* ===== Aurora (오로라 웨이브) ===== */
+.hero-aurora {
+    position: absolute;
+    top: 5%;
+    left: -20%;
+    width: 140%;
+    height: 45%;
+    background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(100, 180, 255, 0.04) 30%,
+        rgba(120, 200, 255, 0.08) 40%,
+        rgba(80, 160, 240, 0.06) 50%,
+        rgba(140, 100, 220, 0.04) 60%,
+        transparent 75%
+    );
+    filter: blur(40px);
+    animation: auroraDrift 12s ease-in-out infinite alternate;
+    transform-origin: center;
+}
+
+.hero-aurora--2 {
+    top: 10%;
+    left: -10%;
+    width: 120%;
+    height: 35%;
+    background: linear-gradient(
+        100deg,
+        transparent 15%,
+        rgba(140, 100, 220, 0.03) 30%,
+        rgba(100, 200, 180, 0.06) 45%,
+        rgba(120, 180, 255, 0.04) 60%,
+        transparent 80%
+    );
+    filter: blur(50px);
+    animation: auroraDrift2 16s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift {
+    0% {
+        transform: translateX(-3%) scaleY(1) skewX(0deg);
+        opacity: 0.5;
+    }
+    25% {
+        transform: translateX(1%) scaleY(1.15) skewX(2deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(4%) scaleY(0.9) skewX(-1deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateX(2%) scaleY(1.1) skewX(1deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(-2%) scaleY(1.05) skewX(-2deg);
+        opacity: 0.7;
+    }
+}
+
+@keyframes auroraDrift2 {
+    0% {
+        transform: translateX(5%) scaleY(1.1) rotate(1deg);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateX(-4%) scaleY(0.85) rotate(-1deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(3%) scaleY(1.05) rotate(0.5deg);
+        opacity: 0.5;
+    }
+}
+
+/* ===== Mountains ===== */
+.hero-mountain--back {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    background: #1a1e30;
+    clip-path: polygon(
+        0% 100%, 0% 75%, 5% 60%, 12% 48%, 18% 38%, 25% 28%,
+        30% 22%, 35% 18%, 40% 15%, 45% 12%, 48% 10%, 50% 8%,
+        52% 10%, 55% 14%, 58% 18%, 62% 25%, 65% 30%, 68% 33%,
+        72% 36%, 78% 42%, 82% 48%, 88% 55%, 92% 60%, 96% 65%,
+        100% 70%, 100% 100%
+    );
+}
+
+.hero-mountain--mid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48%;
+    background: linear-gradient(180deg, #2a3050 0%, #1d2238 100%);
+    clip-path: polygon(
+        0% 100%, 0% 55%, 8% 50%, 15% 42%, 22% 35%, 28% 28%,
+        33% 22%, 38% 18%, 42% 20%, 45% 25%, 48% 30%, 50% 28%,
+        53% 22%, 56% 18%, 60% 22%, 63% 28%, 66% 32%, 70% 38%,
+        75% 44%, 80% 50%, 85% 55%, 90% 58%, 95% 62%,
+        100% 65%, 100% 100%
+    );
+}
+
+.hero-mountain--front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(180deg, #12152a 0%, #0b0e1a 100%);
+    clip-path: polygon(
+        0% 100%, 0% 60%, 5% 55%, 10% 48%, 15% 42%, 20% 38%,
+        25% 36%, 30% 40%, 35% 45%, 38% 42%, 42% 38%, 45% 35%,
+        48% 38%, 52% 42%, 55% 45%, 58% 48%, 60% 45%, 63% 40%,
+        66% 36%, 70% 38%, 75% 44%, 80% 50%, 85% 55%, 90% 58%,
+        95% 60%, 100% 62%, 100% 100%
+    );
+}
+
+/* Sun glow — pulsing */
+.hero-mountain--back::before {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    left: 45%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(232,164,85,0.35) 0%, rgba(232,164,85,0.1) 40%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: sunGlow 5s ease-in-out infinite alternate;
+}
+
+/* 산 뒤쪽 림라이트 */
+.hero-mountain--back::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 60%,
+        rgba(232, 164, 85, 0.06) 80%,
+        rgba(232, 164, 85, 0.1) 100%
+    );
+}
+
+@keyframes sunGlow {
+    0% {
+        opacity: 0.5;
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3) translateY(-5px);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1.1) translateY(2px);
+    }
+}
+
+/* ===== Fog — 2 layers, different speeds ===== */
+.hero-fog {
+    position: absolute;
+    bottom: 28%;
+    left: -15%;
+    width: 130%;
+    height: 18%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(180, 200, 230, 0.06) 15%,
+        rgba(180, 200, 230, 0.14) 35%,
+        rgba(200, 210, 240, 0.18) 50%,
+        rgba(180, 200, 230, 0.12) 65%,
+        rgba(180, 200, 230, 0.06) 85%,
+        transparent 100%
+    );
+    filter: blur(25px);
+    animation: fogFlow1 18s ease-in-out infinite alternate;
+}
+
+.hero-fog--2 {
+    bottom: 22%;
+    left: -10%;
+    width: 120%;
+    height: 12%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(160, 190, 220, 0.04) 20%,
+        rgba(160, 190, 220, 0.1) 50%,
+        rgba(160, 190, 220, 0.04) 80%,
+        transparent 100%
+    );
+    filter: blur(30px);
+    animation: fogFlow2 25s ease-in-out infinite alternate;
+}
+
+@keyframes fogFlow1 {
+    0% { transform: translateX(-8%) scaleX(1); }
+    30% { transform: translateX(2%) scaleX(1.05); }
+    70% { transform: translateX(6%) scaleX(0.95); }
+    100% { transform: translateX(-3%) scaleX(1.02); }
+}
+
+@keyframes fogFlow2 {
+    0% { transform: translateX(8%) scaleY(1.1); }
+    50% { transform: translateX(-6%) scaleY(0.9); }
+    100% { transform: translateX(5%) scaleY(1.05); }
+}
+
+/* ===== Floating Particles (떠다니는 빛 입자) ===== */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-particle {
+    position: absolute;
+    background: rgba(200, 220, 255, 0.7);
+    border-radius: 50%;
+    animation: particleFloat linear infinite;
+    box-shadow: 0 0 6px 1px rgba(200, 220, 255, 0.3);
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+    }
+    10% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.4;
+        transform: translateY(-60px) translateX(20px);
+    }
+    80% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-120px) translateX(-15px);
+    }
+}
+
+/* ===== Text Container ===== */
 .hero-container {
     position: fixed;
     width: 1250px;
@@ -23,7 +408,7 @@
 .hero-box {
     margin: 10px 0;
     color: white;
-    font-family: 'MyLotteBold'; 
+    font-family: 'MyLotteBold';
     font-weight: 300;
     transition: opacity 1s ease;
 }
@@ -32,6 +417,8 @@
     font-size: 1.75rem;
     margin-top: 120px;
     margin-bottom: 20px;
+    letter-spacing: 0.15em;
+    opacity: 0.85;
 }
 
 .hero-title {
@@ -40,21 +427,24 @@
     margin: 0;
 }
 
+.hero-name {
+    text-shadow:
+        0 0 40px rgba(74, 122, 181, 0.4),
+        3px 4px 5px rgba(11, 14, 26, 0.6);
+}
+
 .font-shadow {
-    text-shadow: 3px 4px 5px rgb(58, 97, 156);
+    text-shadow: 3px 4px 5px rgba(11, 14, 26, 0.6);
 }
 
-.font-b {
-    background-color: rgb(57, 57, 192);
+.font-highlight {
+    background: linear-gradient(135deg, rgba(45, 74, 122, 0.85), rgba(74, 122, 181, 0.85));
+    padding: 8px 20px;
+    display: inline-block;
+    backdrop-filter: blur(4px);
 }
 
-.hero-description {
-    font-size: 1.125rem;
-    color: #4b5563;
-    margin-top: 20px;
-    line-height: 1.6;
-}
-
+/* ===== Scroll Indicator ===== */
 .scroll-down-indicator {
     position: fixed;
     bottom: 20px;
@@ -71,7 +461,7 @@
 .mouse {
     width: 35px;
     height: 55px;
-    border: 2px solid white;
+    border: 2px solid rgba(255, 255, 255, 0.6);
     border-radius: 25px;
     position: relative;
     margin: 0 auto 10px;
@@ -80,113 +470,43 @@
 .scroll {
     width: 5px;
     height: 10px;
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    animation: scrollAnimation 1.5s infinite;
-}
-
-.scroll-down-indicator {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: white;
-    font-family: 'Arial, sans-serif';
-    font-size: 1.2rem;
-    transition: opacity 1s ease;
-    z-index: 3;
-}
-
-.mouse {
-    width: 35px;
-    height: 55px;
-    border: 2px solid white;
-    border-radius: 25px;
-    position: relative;
-    margin: 0 auto 10px;
-}
-
-.scroll {
-    width: 5px;
-    height: 10px;
-    background: white;
-    border-radius: 5px;
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: scrollAnimation 1s infinite ease-in-out;
+    animation: scrollAnimation 1.5s infinite ease-in-out;
 }
 
 @keyframes scrollAnimation {
-    0% {
-        top: 10px;
-        opacity: 1;
-    }
-
-    100% {
-        top: 35px;
-        opacity: 0.5;
-    }
+    0% { top: 10px; opacity: 1; }
+    100% { top: 35px; opacity: 0.5; }
 }
 
-.vidio-container {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 2s ease;
-}
-
-.bg-video__content {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    -webkit-appearance: none;
-    pointer-events: none; 
-}
-
+/* ===== Font ===== */
 @font-face {
     font-family: 'MyLotteBold';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/MyLotteBold.woff') format('woff');
     font-weight: 300;
     font-style: normal;
-    }
+}
 
+/* ===== Responsive ===== */
 @media screen and (max-width: 768px) {
     .hero-container {
         width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
-    .hero-title {
-        font-size: 3rem;
-    }
+    .hero-title { font-size: 3rem; }
+    .hero-subtitle { font-size: 1.25rem; }
+    .font-highlight { padding: 6px 14px; }
 
-    .hero-subtitle {
-        font-size: 1.25rem;
-    }
-
-    .hero-description {
-        font-size: 0.9rem;
-    }
+    .shooting-star { display: none; }
 }
 
 @media screen and (max-width: 480px) {
-     .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .hero-description {
-        font-size: 0.85rem;
-    }
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1rem; }
 }
