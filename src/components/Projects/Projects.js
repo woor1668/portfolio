@@ -21,11 +21,9 @@ const SlideContent = ({ slide, slideIndex }) => {
         </div>
         <h4>{slide.featureHeader}</h4>
         <ul>
-          <div>
-            {slide.features?.map((feature, idx) => (
-              <li key={idx} className="feat-badge">{feature}</li>
-            ))}
-          </div>
+          {slide.features?.map((feature, idx) => (
+            <li key={idx} className="feat-summary">{feature.replace("⦁ ", "")}</li>
+          ))}
         </ul>
       </>
     );
@@ -34,24 +32,21 @@ const SlideContent = ({ slide, slideIndex }) => {
     <>
       <h4 className="ft-hd">{slide.featureHeader}</h4>
       <ul>
-        <div>
-          {slide.features?.map((feature, idx) => (
-            <li key={idx} className="feat-badge ft-bd">
-              {feature.startsWith("⦁") ? (
-                <h4>{feature}</h4>
-              ) : (
-                feature
-              )}
-            </li>
-          ))}
-        </div>
+        {slide.features?.map((feature, idx) => {
+          if (feature.startsWith("⦁")) {
+            return <li key={idx} className="feat-header">{feature.replace("⦁ ", "")}</li>;
+          }
+          return <li key={idx} className="feat-detail">{feature.replace("- ", "")}</li>;
+        })}
       </ul>
     </>
   );
 };
 
-const ProjectCard = ({ project, isActive }) => {
+const ProjectCard = ({ project, isActive, onNextProject, onPrevProject }) => {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const totalSlides = project.slides.length;
   const dragStartX = useRef(null);
 
@@ -62,26 +57,62 @@ const ProjectCard = ({ project, isActive }) => {
 
   const handlePointerDown = (e) => {
     dragStartX.current = e.clientX;
+    setIsDragging(true);
+    setDragOffset(0);
   };
 
-  const handlePointerUp = (e) => {
-    if (dragStartX.current === null) return;
-    const diff = dragStartX.current - e.clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && slideIndex < totalSlides - 1) setSlideIndex(slideIndex + 1);
-      else if (diff < 0 && slideIndex > 0) setSlideIndex(slideIndex - 1);
+  const handlePointerMove = (e) => {
+    if (!isDragging || dragStartX.current === null) return;
+    const diff = e.clientX - dragStartX.current;
+    // 끝에서는 저항감 (offset을 절반만)
+    if ((slideIndex === 0 && diff > 0) || (slideIndex === totalSlides - 1 && diff < 0)) {
+      setDragOffset(diff * 0.3);
+    } else {
+      setDragOffset(diff);
     }
+  };
+
+  const handlePointerUp = () => {
+    if (dragStartX.current === null) return;
+    const threshold = 60;
+    
+    if (Math.abs(dragOffset) > threshold) {
+      if (dragOffset < 0) {
+        // 왼쪽으로 스와이프 → 다음
+        if (slideIndex < totalSlides - 1) {
+          setSlideIndex(slideIndex + 1);
+        } else if (onNextProject) {
+          onNextProject();
+        }
+      } else {
+        // 오른쪽으로 스와이프 → 이전
+        if (slideIndex > 0) {
+          setSlideIndex(slideIndex - 1);
+        } else if (onPrevProject) {
+          onPrevProject();
+        }
+      }
+    }
+    
+    setDragOffset(0);
+    setIsDragging(false);
     dragStartX.current = null;
+  };
+
+  const trackStyle = {
+    transform: `translateX(calc(-${slideIndex * 100}% + ${dragOffset}px))`,
+    transition: isDragging ? 'none' : 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
   };
 
   return (
     <div className={`project-layer ${isActive ? 'project-layer--active' : ''}`}>
-      {/* 슬라이드 트랙 — translateX로 이동 */}
       <div 
         className="slide-track"
-        style={{ transform: `translateX(-${slideIndex * 100}%)` }}
+        style={trackStyle}
         onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
       >
         {project.slides.map((slide, idx) => (
           <div className="slide-item" key={idx}>
@@ -94,6 +125,7 @@ const ProjectCard = ({ project, isActive }) => {
                   src={slide.image}
                   alt={`슬라이드 ${idx + 1}`}
                   className="project-image"
+                  draggable={false}
                 />
               </div>
             </div>
@@ -101,7 +133,6 @@ const ProjectCard = ({ project, isActive }) => {
         ))}
       </div>
 
-      {/* 슬라이드 네비게이션 — 트랙 바깥 */}
       {totalSlides > 1 && (
         <div className="slide-nav">
           <button 
@@ -144,7 +175,7 @@ const Projects = () => {
   }, 0.1);
 
   const changeProject = useCallback((idx) => {
-    if (idx === activeProject) return;
+    if (idx < 0 || idx >= projectsData.length || idx === activeProject) return;
     setActiveProject(idx);
 
     if (tabsRef.current?.children[idx]) {
@@ -154,14 +185,6 @@ const Projects = () => {
     }
   }, [activeProject]);
 
-  const goPrev = () => {
-    if (activeProject > 0) changeProject(activeProject - 1);
-  };
-
-  const goNext = () => {
-    if (activeProject < projectsData.length - 1) changeProject(activeProject + 1);
-  };
-
   return (
     <div className="wrapper pr-wp"> 
       <div className="container">
@@ -170,7 +193,7 @@ const Projects = () => {
             <div className={`project-nav ${isVisible.title ? "slide-up-visible" : ""}`}>
               <button
                 className={`project-nav-arrow ${activeProject === 0 ? 'project-nav-arrow--disabled' : ''}`}
-                onClick={goPrev}
+                onClick={() => changeProject(activeProject - 1)}
                 disabled={activeProject === 0}
               >
                 <FaChevronLeft />
@@ -191,7 +214,7 @@ const Projects = () => {
 
               <button
                 className={`project-nav-arrow ${activeProject === projectsData.length - 1 ? 'project-nav-arrow--disabled' : ''}`}
-                onClick={goNext}
+                onClick={() => changeProject(activeProject + 1)}
                 disabled={activeProject === projectsData.length - 1}
               >
                 <FaChevronRight />
@@ -213,6 +236,8 @@ const Projects = () => {
                   key={idx}
                   project={project}
                   isActive={activeProject === idx}
+                  onNextProject={() => changeProject(activeProject + 1)}
+                  onPrevProject={() => changeProject(activeProject - 1)}
                 />
               ))}
             </div>
