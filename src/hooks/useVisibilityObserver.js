@@ -19,10 +19,12 @@ const useVisibilityObserver = (refs, threshold = 0.3) => {
       });
     }, observerOptions);
 
-    Object.values(refs).forEach((ref) => observer.observe(ref.current));
+    Object.values(refs).forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
 
     return () => observer.disconnect();
-  }, [refs]);
+  }, [refs, threshold]);
 
   return isVisible;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
@@ -16,26 +16,33 @@ const App = () => {
     const html = document.documentElement;
     html.style.scrollBehavior = "auto";
     window.scrollTo(0, 0);
-    if(window.scrollY === 0){
-      html.style.scrollBehavior = "smooth"; 
+    if (window.scrollY === 0) {
+      html.style.scrollBehavior = "smooth";
+    }
+  }, []);
+
+  const handleScroll = useCallback(() => {
+    const aboutSection = document.getElementById("about");
+    if (aboutSection && window.scrollY >= aboutSection.offsetTop - 900) {
+      setShowOpacity(1);
+    } else {
+      setShowOpacity(0);
     }
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const aboutSection = document.getElementById("about");
-      if (aboutSection && window.scrollY >= aboutSection.offsetTop - 900) {
-        setShowOpacity(1);
-      } else {
-        setShowOpacity(0);
-      }
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        handleScroll();
+        ticking = false;
+      });
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [handleScroll]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

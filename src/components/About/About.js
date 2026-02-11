@@ -5,19 +5,20 @@ import "./About.css";
 const About = () => {
   const titleRef = useRef(null);
   const imageRefs = [useRef(null), useRef(null)];
-  const textRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+  const textRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
   
   const isVisible = useVisibilityObserver({
     title: titleRef,
     image0: imageRefs[0],
     image1: imageRefs[1],
+    desc: textRefs[6],
     text0: textRefs[0],
     text1: textRefs[1],
     text2: textRefs[2],
     text3: textRefs[3],
     text4: textRefs[4],
     text5: textRefs[5]
-  });
+  }, 0.05);
 
   return (
     <div className="wrapper">
@@ -41,7 +42,7 @@ const About = () => {
             </p>
           </div>
           <div className="about-text">
-            <p className="description slide-up-visible">
+            <div ref={textRefs[6]} className={`description ${isVisible.desc ? "slide-up-visible" : ""}`}>
               <h3 ref={textRefs[0]} className={`${isVisible.text0 ? "slide-up-visible" : ""}`}>
                 사람의 필요와 경험을 연결하는 과정에서 가치를 찾습니다.
               </h3>
@@ -50,7 +51,7 @@ const About = () => {
                 변화하는 환경 속에서도 끊임없이 배우고 도전하는 자세를 잃지 않으려 합니다.<br />
                 사람과 사람을 따뜻하게 이어주는 결과물을 만드는 것이 저의 목표입니다.
               </p>
-            </p>
+            </div>
             <h3
               ref={textRefs[2]} 
               className={`contact-title ${isVisible.text2 ? "slide-up-visible" : ""}`}>Contact</h3>

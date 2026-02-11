@@ -1,133 +1,96 @@
 .about-content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 30px;
-    flex-wrap: nowrap; 
-  }
-  
-  .image-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 360px;
-    max-height: 360px;
-    margin: 30px 0px;
-  }
-  
-  .profile-image {
-    max-width: 360px;
-    max-height: 360px;
-    object-fit: cover;
-    object-position: right;
-  }
-  
-  .about-text {
-    text-align: left;
-    max-width: 750px;
-  }
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
 
-  .name {
-    margin: 30px 0px;
-    font-size: 3rem;
-    font-weight: 900;
-    color: #444;
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 360px;
+  max-height: 360px;
+  margin: 30px 0px;
+}
+
+.profile-image {
+  max-width: 360px;
+  max-height: 360px;
+  object-fit: cover;
+  object-position: right;
+}
+
+.about-text {
+  text-align: left;
+  max-width: 750px;
+}
+
+.name {
+  margin: 30px 0px;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #444;
+}
+
+.job-title {
+  font-size: 1.5rem;
+  color: #666;
+  font-weight: normal;
+}
+
+.description {
+  font-size: 1.5rem;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 55px;
+}
+
+.contact-title, .archive-title {
+  font-size: 1.8rem;
+  color: #444;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.email, .gitHub a {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 55px;
+  text-decoration-line: none;
+}
+
+/* 애니메이션 — anim-hidden 공통 클래스 활용 */
+.about-text > *,
+.image-container > *,
+.description > *,
+.ab-tt {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+  .image-container { width: 300px; height: 300px; }
+  .profile-image { width: 300px; height: 300px; object-position: center; }
+  .about-text { max-width: 500px; }
+  .name { font-size: 2rem; }
+  .job-title, .description, .contact-title, .archive-title, .email, .gitHub a {
+    font-size: 1rem;
   }
-  
-  .job-title {
-    font-size: 1.5rem;
-    color: #666;
-    font-weight: normal;
-  }
-  
-  .description {
-    font-size: 1.5rem;
-    color: #444;
-    line-height: 1.5;
-    margin-bottom: 55px;
-  }
-
-  .contact-title, .archive-title {
-    font-size: 1.8rem;
-    color: #444;
-    margin-top: 0;
-    margin-bottom: 15px;
-  }
-  
-  .email, .gitHub a {
-    font-size: 1.5rem;
-    color: #555;
-    margin-top: 0;
-    margin-bottom: 55px;
-    text-decoration-line: none;
-  }
-
-  /* 애니메이션*/
-  .about-text > *,
-  .image-container > *,
-  .description > *,
-  .ab-tt {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }  
-
-  @media screen and (max-width: 768px) {
-    .image-container {
-        width: 300px;
-        height: 300px;
-    }
-
-    .profile-image {
-        width: 300px;
-        height: 300px;
-        object-position: center;
-    }
-
-    .about-text {
-        max-width: 500px;
-    }
-
-    .name {
-        font-size: 2rem;
-    }
-
-    .job-title,
-    .description,
-    .contact-title,
-    .archive-title,
-    .email,
-    .gitHub a
-     {
-        font-size: 1rem;
-    }
 }
 
 @media screen and (max-width: 480px) {
-    .about-content {
-      flex-wrap: wrap; 
-      align-items: center;
-      text-align: center; 
-      flex-direction: column;
-    }
-
-    .image-container {
-        width: 240px;
-        height: 240px;
-    }
-
-    .profile-image {
-        width: 240px;
-        height: 240px;
-    }
-
-    .contact-title,
-    .archive-title,
-    .email,
-    .gitHub
-     {
-      text-align: center; 
-    }
+  .about-content {
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  .image-container { width: 240px; height: 240px; }
+  .profile-image { width: 240px; height: 240px; }
+  .contact-title, .archive-title, .email, .gitHub { text-align: center; }
 }
-  

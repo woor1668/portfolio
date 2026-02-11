@@ -485,12 +485,7 @@
 }
 
 /* ===== Font ===== */
-@font-face {
-    font-family: 'MyLotteBold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/MyLotteBold.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-}
+/* MyLotteBold — index.css로 이동 */
 
 /* ===== Responsive ===== */
 @media screen and (max-width: 768px) {

@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import "./Hero.css";
 
@@ -7,18 +6,24 @@ const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [meteors, setMeteors] = useState([]);
+  const viewportHeight = useRef(window.innerHeight);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const y = window.scrollY;
-      setScrollY(y);
-      if (y > 50 && !hasScrolled) setHasScrolled(true);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrollY(y);
+        if (y > 50 && !hasScrolled) setHasScrolled(true);
+        ticking = false;
+      });
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasScrolled]);
 
-  // 유성 생성기 — 스크롤 시작 후 랜덤 간격으로 계속 생성
   const spawnMeteor = useCallback(() => {
     const id = Date.now() + Math.random();
     const meteor = {
@@ -30,7 +35,6 @@ const Hero = () => {
       tailLen: Math.random() * 80 + 60,
     };
     setMeteors(prev => [...prev, meteor]);
-    // 끝나면 제거
     setTimeout(() => {
       setMeteors(prev => prev.filter(m => m.id !== id));
     }, meteor.duration * 1000 + 200);
@@ -39,27 +43,24 @@ const Hero = () => {
   useEffect(() => {
     if (!hasScrolled) return;
 
-    // 처음 스크롤 시 2~3개 즉시 발사
     for (let i = 0; i < 3; i++) {
       setTimeout(() => spawnMeteor(), i * 400);
     }
 
-    // 이후 1~4초 간격으로 계속 생성
+    let timeoutRef;
     const spawn = () => {
       spawnMeteor();
       const next = Math.random() * 3000 + 1000;
       timeoutRef = setTimeout(spawn, next);
     };
-    let timeoutRef = setTimeout(spawn, 2000);
+    timeoutRef = setTimeout(spawn, 2000);
 
     return () => clearTimeout(timeoutRef);
   }, [hasScrolled, spawnMeteor]);
 
-  const viewportHeight = window.innerHeight;
-  const fadeOutPoint = 2 * viewportHeight;
-
-  const getHeroOpacity = () => (scrollY >= fadeOutPoint ? 0 : 1);
-  const getTextVisibility = (start) => (scrollY >= start ? 1 : 0);
+  const fadeOutPoint = 2 * viewportHeight.current;
+  const heroOpacity = scrollY >= fadeOutPoint ? 0 : 1;
+  const getTextVis = (start) => (scrollY >= start ? 1 : 0);
 
   const particles = useMemo(() =>
     Array.from({ length: 30 }, (_, i) => ({
@@ -72,16 +73,12 @@ const Hero = () => {
     })), []);
 
   return (
-    <motion.div
-      className="hero-wrapper"
-      style={{ opacity: getHeroOpacity() }}
-    >
+    <div className="hero-wrapper" style={{ opacity: heroOpacity }}>
       <div className="hero-bg">
         <div className="hero-bg-gradient" />
         <div className="hero-stars" />
         <div className="hero-stars hero-stars--layer2" />
 
-        {/* 유성들 — 동적 생성/제거 */}
         {meteors.map((m) => (
           <div
             key={m.id}
@@ -99,11 +96,9 @@ const Hero = () => {
 
         <div className="hero-aurora" />
         <div className="hero-aurora hero-aurora--2" />
-
         <div className="hero-mountain hero-mountain--back" />
         <div className="hero-mountain hero-mountain--mid" />
         <div className="hero-mountain hero-mountain--front" />
-
         <div className="hero-fog" />
         <div className="hero-fog hero-fog--2" />
 
@@ -126,38 +121,24 @@ const Hero = () => {
       </div>
 
       <div className="hero-container">
-        <motion.div
-          className="hero-box font-shadow"
-          style={{ opacity: getTextVisibility(100) }}
-        >
+        <div className="hero-box font-shadow" style={{ opacity: getTextVis(100) }}>
           <h1 className="hero-subtitle">Welcome to my Portfolio</h1>
-        </motion.div>
-
-        <motion.div
-          className="hero-box font-highlight"
-          style={{ opacity: getTextVisibility(400) }}
-        >
+        </div>
+        <div className="hero-box font-highlight" style={{ opacity: getTextVis(400) }}>
           <h2 className="hero-title">사람과 사람을 연결하는 개발자</h2>
-        </motion.div>
-
-        <motion.div
-          className="hero-box font-shadow"
-          style={{ opacity: getTextVisibility(700) }}
-        >
+        </div>
+        <div className="hero-box font-shadow" style={{ opacity: getTextVis(700) }}>
           <h2 className="hero-title hero-name">이재봉입니다</h2>
-        </motion.div>
+        </div>
       </div>
 
-      <div
-        className="scroll-down-indicator"
-        style={{ opacity: scrollY < 100 ? 1 : 0 }}
-      >
+      <div className="scroll-down-indicator" style={{ opacity: scrollY < 100 ? 1 : 0 }}>
         <div className="mouse">
           <div className="scroll"></div>
         </div>
         <FaAngleDoubleDown />
       </div>
-    </motion.div>
+    </div>
   );
 };
 

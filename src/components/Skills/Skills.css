@@ -13,45 +13,35 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-}  
-  
-/* 기본 카테고리 스타일 */
+}
+
 .category {
-  flex: 1 1 300px; 
+  flex: 1 1 300px;
   min-width: 250px;
   background-color: #f9f9f9;
-  padding: 15px; 
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* 애니메이션 */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* 아이콘 개수가 적은 경우 (작은 박스) */
-.category.small {
-  flex: 1 1 100px;
-  min-width: 230px;
-  padding: 10px;
-}
+.category.small { flex: 1 1 100px; min-width: 230px; padding: 10px; }
+.category.big { flex: 1 1 400px; min-width: 500px; padding: 10px; }
 
-/* 아이콘 개수가 적은 경우 (작은 박스) */
-.category.big {
-  flex: 1 1 400px;
-  min-width: 500px;
-  padding: 10px;
-}
-
-/* 카테고리 제목 */
 .category-title {
   font-size: 1.5rem;
   font-weight: bold;
   color: rgb(94, 117, 167);
   margin: 15px 0px;
 }
-  
-/* 아이콘 정렬 */
+
 .icons {
   display: flex;
   flex-wrap: wrap;
@@ -59,72 +49,34 @@
   justify-content: center;
   margin-bottom: 15px;
 }
-    
-/* React Icons 기본 스타일 */
+
 .icons svg {
   width: 50px;
   height: 50px;
+  color: black;
   transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
-  
-/* 아이콘별 색상 */
-.icons svg {
-  color: black;
-}
 
-.category,
 .sk-tt {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.category:nth-child(1),
-.category:nth-child(3),
-.category:nth-child(5) {
-  transition-delay: 0s;
-}
-
-.category:nth-child(2),
-.category:nth-child(4),
-.category:nth-child(6) {
-  transition-delay: 0.1s;
-}
-
-.category:nth-child(7) {
-  transition-delay: 0.2s;
-}
-
-.category:nth-child(8) {
-  transition-delay: 0.3s;
-}
+/* Stagger delays */
+.category:nth-child(odd) { transition-delay: 0s; }
+.category:nth-child(even) { transition-delay: 0.1s; }
+.category:nth-child(7) { transition-delay: 0.2s; }
+.category:nth-child(8) { transition-delay: 0.3s; }
 
 @media screen and (max-width: 768px) {
-  .category.big {
-    min-width: 250px;
-  }
-
-  .skills-container {
-    max-width: 100%;
-  }
-  .category:nth-child(2),
-  .category:nth-child(4),
-  .category:nth-child(7) {
-    transition-delay: 0s;
-  }
-
-  .category:nth-child(8) {
-    transition-delay: 0.1s;
-  }
+  .category.big { min-width: 250px; }
+  .skills-container { max-width: 100%; }
+  .category:nth-child(even), .category:nth-child(7) { transition-delay: 0s; }
+  .category:nth-child(8) { transition-delay: 0.1s; }
 }
 
 @media screen and (max-width: 480px) {
-  .category.small {
-    min-width: 250px;
-  }
-
-  .category:nth-child(6)
-  .category:nth-child(8) {
-    transition-delay: 0s;
-  }
+  .category.small { min-width: 250px; }
+  .category:nth-child(6), .category:nth-child(8) { transition-delay: 0s; }
 }
