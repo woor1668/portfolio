@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center; 
     align-items: center;
-    padding: 15px 0px;
+    padding: 0px;
+    height: 60px;
     position: fixed;
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -15,7 +16,9 @@
 .navi-container{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 1250px;
+    height: 100%;
   }
 
   .navbar-logo {

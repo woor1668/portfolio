@@ -52,7 +52,7 @@ const App = () => {
     <div>
       <Navbar />
       <div className="app-container">
-        <section id="hero"><Hero /></section>
+        <section id="hero" className="hero-section"><Hero /></section>
         <section id="about"><About /></section>
         <section id="skills"><Skills /></section>
         <section id="career"><Career /></section>

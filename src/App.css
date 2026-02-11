@@ -2,7 +2,6 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  scroll-snap-type: y mandatory;
   gap: 0;
 }
 
@@ -12,7 +11,19 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  scroll-snap-align: start;
+  position: relative;
+  z-index: 1;
+  background: white;
+}
+
+.hero-section {
+  min-height: auto;
+  height: auto;
+  display: block;
+  margin-bottom: -100vh;
+  position: relative;
+  z-index: 99;
+  background: transparent;
 }
 
 .wrapper {

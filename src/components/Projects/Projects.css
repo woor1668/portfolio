@@ -1,8 +1,6 @@
 /* ===== 1. 기초 레이아웃 및 배경 ===== */
 .pr-wp {
     background-color: #121212;
-    padding: 80px 0;
-    min-height: 100vh;
 }
 
 /* 메인 타이틀 */
