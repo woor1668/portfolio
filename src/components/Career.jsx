@@ -31,9 +31,9 @@ export default function Career() {
         </div>
 
         <ol className="commits">
-          {[...career].reverse().map((c) => (
-            <li key={c.year} className="commit" data-reveal>
-              <div className="commit__graph" aria-hidden="true"><i /></div>
+          {[...career].reverse().map((c, ci) => (
+            <li key={c.year} className={`commit ${ci === 0 ? 'is-head' : ''}`} data-reveal>
+              <div className="commit__graph" aria-hidden="true"><b /><i /></div>
               <div className="commit__body">
                 <p className="commit__top">
                   <span className="commit__tag">tag: {c.tag}</span>
@@ -44,7 +44,7 @@ export default function Career() {
                   {shown.map((b, bi) => (
                     <div key={b.key} className={`diff b-${b.color}`} style={{ '--i': bi }}>
                       <p className="diff__head">{b.label}</p>
-                      <ul>{c[b.key].map((t) => <li key={t}><span className="diff__plus">+</span>{t}</li>)}</ul>
+                      <ul>{c[b.key].map((t, ti) => <li key={t} style={{ '--t': ti }}><span className="diff__plus">+</span>{t}</li>)}</ul>
                     </div>
                   ))}
                 </div>

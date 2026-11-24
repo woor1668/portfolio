@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { projects } from '../data'
 import { useModal } from '../hooks'
 import SectionHead from './SectionHead'
@@ -23,7 +24,11 @@ const team = (people) => {
 
 function Viewer({ p, onClose, onMove }) {
   const [i, setI] = useState(0)
+  const prev = useRef(0)
+  const dir = i >= prev.current ? 1 : -1 // 넘기는 방향에 맞춰 화면이 들어옴
+  useEffect(() => { prev.current = i }, [i])
   const s = p.slides[i]
+  let n = 0 // 항목 순서대로 등장
   const close = useCallback(() => onClose(), [onClose])
   useModal(true, close)
   useEffect(() => { setI(0) }, [p.slug])
@@ -36,10 +41,11 @@ function Viewer({ p, onClose, onMove }) {
     return () => removeEventListener('keydown', onKey)
   }, [p.slides.length])
 
-  return (
+  return createPortal(
     <div className="viewer" role="dialog" aria-modal="true" aria-label={p.title} onClick={close}>
-      <div className="viewer__win" onClick={(e) => e.stopPropagation()}>
+      <div className="viewer__win" key={p.slug} onClick={(e) => e.stopPropagation()}>
         <div className="viewer__bar">
+          <span className="viewer__progress" style={{ transform: `scaleX(${(i + 1) / p.slides.length})` }} aria-hidden="true" />
           <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
           <span className="viewer__path">projects/{p.slug}/<b>{s.header}</b></span>
           <div className="viewer__nav">
@@ -56,7 +62,7 @@ function Viewer({ p, onClose, onMove }) {
             <p className="viewer__label">EXPLORER</p>
             <ul className="viewer__files">
               {p.slides.map((x, k) => (
-                <li key={x.header}>
+                <li key={x.header} style={{ '--i': k }}>
                   <button className={k === i ? 'is-on' : ''} onClick={() => setI(k)}>
                     <i className={`ext ext--${k === 0 ? 'md' : 'tsx'}`} />{k === 0 ? 'README.md' : x.header}
                   </button>
@@ -64,18 +70,18 @@ function Viewer({ p, onClose, onMove }) {
               ))}
             </ul>
           </aside>
-          <div className="viewer__content">
+          <div className="viewer__content" key={i} style={{ '--dir': dir }}>
             <div className="viewer__shot">
               {s.image.endsWith('.mp4')
                 ? <video key={s.image} src={s.image} autoPlay muted loop playsInline onLoadedData={(e) => e.currentTarget.play().catch(() => {})} aria-label={`${p.title} ${s.header}`} />
                 : <img key={s.image} src={s.image} alt={`${p.title} ${s.header}`} decoding="async" />}
             </div>
             <div className="viewer__text">
-              <h3>{s.header}</h3>
+              <h3><span>{s.header}</span></h3>
               {s.groups.map((g, gi) => (
                 <div key={gi} className="viewer__group">
-                  {g.title && <p className="viewer__gt"><span className="c-com">##</span> {g.title}</p>}
-                  <ul>{g.items.map((t) => <li key={t}>{t}</li>)}</ul>
+                  {g.title && <p className="viewer__gt" style={{ '--i': n++ }}><span className="c-com">##</span> {g.title}</p>}
+                  <ul>{g.items.map((t) => <li key={t} style={{ '--i': n++ }}>{t}</li>)}</ul>
                 </div>
               ))}
               <div className="viewer__pager">
@@ -87,7 +93,8 @@ function Viewer({ p, onClose, onMove }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

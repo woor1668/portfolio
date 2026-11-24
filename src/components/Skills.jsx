@@ -3,6 +3,7 @@ import { ICONS } from './icons'
 import SectionHead from './SectionHead'
 
 export default function Skills() {
+  let n = 0 // 전체 칩 순서 (빛이 파도처럼 지나가게)
   return (
     <section className="section" id="skills">
       <SectionHead no="02" file="skills.json" title="Skills" desc="실무와 프로젝트에서 직접 사용한 기술입니다." />
@@ -14,7 +15,7 @@ export default function Skills() {
               {g.items.map(([name, icon, color], ci) => {
                 const I = ICONS[icon]
                 return (
-                  <li key={name} style={{ '--c': color, '--i': ci }}>
+                  <li key={name} style={{ '--c': color, '--i': ci, '--w': n++ }}>
                     {I && <I aria-hidden="true" />}
                     <span>{name}</span>
                   </li>
