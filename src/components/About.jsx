@@ -22,7 +22,7 @@ export default function About() {
       <SectionHead no="01" file="about.ts" title="About Me" />
       <div className="about">
         <div className="about__card" data-reveal>
-          <div className="about__photo"><img src={profile.photo} alt={`${profile.name} 프로필`} /></div>
+          <div className="about__photo"><img src={profile.photo} alt={`${profile.name} 프로필`} width="104" height="104" loading="lazy" /></div>
           <p className="about__name">{profile.name} <span>{profile.nameEn}</span></p>
           <p className="about__role"><span className="dot-live" /> {profile.role}</p>
           <p className="about__lead">{profile.lead}</p>
@@ -35,8 +35,9 @@ export default function About() {
           </div>
           <pre className="editor__code"><code>
             {code.map((line, i) => (
-              <span key={i} className="editor__line"><span className="editor__ln">{i + 1}</span><span>{line}</span></span>
+              <span key={i} className="editor__line" style={{ '--i': i }}><span className="editor__ln">{i + 1}</span><span>{line}</span></span>
             ))}
+            <span className="editor__line" style={{ '--i': code.length }}><span className="editor__ln">{code.length + 1}</span><span><span className="caret caret--thin" /></span></span>
           </code></pre>
         </div>
       </div>

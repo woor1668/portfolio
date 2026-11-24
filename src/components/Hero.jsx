@@ -1,6 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { profile, projects, stats } from '../data'
-import { useTyping } from '../hooks'
+import { useCountUp, useTyping } from '../hooks'
+
+function Stat({ value, label, run }) {
+  const v = useCountUp(value, run)
+  return <div><b>{v}</b><span>{label}</span></div>
+}
 
 const LINES = [
   { type: 'cmd', text: 'whoami' },
@@ -17,17 +22,25 @@ export default function Hero({ onPalette }) {
   const [out, done] = useTyping(LINES)
   const glow = useRef(null)
 
-  // 커서를 따라다니는 은은한 빛
+  // 커서를 따라다니는 은은한 빛 — transform 만 바꿔 GPU 에서 처리 (리페인트 없음)
   useEffect(() => {
     const el = glow.current
-    if (!el || !matchMedia('(hover: hover)').matches) return
-    const on = (e) => { el.style.setProperty('--x', `${e.clientX}px`); el.style.setProperty('--y', `${e.clientY}px`) }
-    addEventListener('pointermove', on)
-    return () => removeEventListener('pointermove', on)
+    if (!el || !matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    let raf = 0, x = 0, y = 0
+    const on = (e) => {
+      x = e.clientX; y = e.clientY
+      if (raf) return
+      raf = requestAnimationFrame(() => { raf = 0; el.style.transform = `translate3d(${x - 300}px, ${y - 300}px, 0)` })
+    }
+    addEventListener('pointermove', on, { passive: true })
+    return () => { removeEventListener('pointermove', on); cancelAnimationFrame(raf) }
   }, [])
+  const [statsOn, setStatsOn] = useState(false)
+  useEffect(() => { const t = setTimeout(() => setStatsOn(true), 700); return () => clearTimeout(t) }, [])
 
   return (
     <section className="hero" id="top">
+      <div className="hero__aura" aria-hidden="true" />
       <div className="hero__glow" ref={glow} aria-hidden="true" />
       <div className="hero__inner">
         <div className="hero__copy">
@@ -38,9 +51,7 @@ export default function Hero({ onPalette }) {
             <span className="hero__line hero__big"><em>{profile.name}</em>입니다<span className="c-op">;</span></span>
           </h1>
           <div className="hero__stats">
-            {stats.map((s) => (
-              <div key={s.label}><b>{s.value}</b><span>{s.label}</span></div>
-            ))}
+            {stats.map((s) => <Stat key={s.label} {...s} run={statsOn} />)}
           </div>
           <div className="hero__cta">
             <a className="btn btn--primary" href="#projects" onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}>

@@ -44,8 +44,8 @@ export default function Career() {
                 </p>
                 <p className="commit__msg">{c.title}</p>
                 <div className="commit__grid">
-                  {shown.map((b) => (
-                    <div key={b.key} className={`diff b-${b.color}`}>
+                  {shown.map((b, bi) => (
+                    <div key={b.key} className={`diff b-${b.color}`} style={{ '--i': bi }}>
                       <p className="diff__head">{b.label}</p>
                       <ul>{c[b.key].map((t) => <li key={t}><span className="diff__plus">+</span>{t}</li>)}</ul>
                     </div>

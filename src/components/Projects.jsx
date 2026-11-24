@@ -52,7 +52,11 @@ function Viewer({ p, onClose, onMove }) {
             </ul>
           </aside>
           <div className="viewer__content">
-            <div className="viewer__shot"><img key={s.image} src={s.image} alt={`${p.title} ${s.header}`} /></div>
+            <div className="viewer__shot">
+              {s.image.endsWith('.mp4')
+                ? <video key={s.image} src={s.image} autoPlay muted loop playsInline onLoadedData={(e) => e.currentTarget.play().catch(() => {})} aria-label={`${p.title} ${s.header}`} />
+                : <img key={s.image} src={s.image} alt={`${p.title} ${s.header}`} decoding="async" />}
+            </div>
             <div className="viewer__text">
               <h3>{s.header}</h3>
               {s.groups.map((g, gi) => (
@@ -91,7 +95,7 @@ export default function Projects({ open, setOpen }) {
                 <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
                 <span>{p.slug}</span>
               </div>
-              <div className="pcard__shot"><img src={p.cover} alt="" loading="lazy" decoding="async" /></div>
+              <div className="pcard__shot"><img src={p.cover} alt="" loading="lazy" decoding="async" width="800" height="500" /></div>
               <div className="pcard__body">
                 <p className="pcard__meta"><span>{p.date}</span><span>{team(p.people)}</span></p>
                 <h3 className="pcard__title">{p.title}</h3>

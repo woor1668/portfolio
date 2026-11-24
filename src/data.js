@@ -8,7 +8,7 @@ export const profile = {
   tagline: '사람과 사람을 연결하는 개발자',
   email: 'woor16645@gmail.com',
   github: 'https://github.com/woor1668',
-  photo: '/profile.png',
+  photo: '/profile.webp',
   lead: '사람의 필요와 경험을 연결하는 과정에서 가치를 찾습니다.',
   body: [
     '문제를 해결할 때는 사용자의 관점에서 먼저 고민합니다.',
@@ -88,7 +88,7 @@ export const projects = [
       "TypeScript",
       "FireBase"
     ],
-    cover: "/projects/t0.png",
+    cover: "/opt/t0-card.webp",
     highlights: [
       "Firebase Auth 기반 소셜 로그인(Google, GitHub)",
       "텍스트/이미지 게시물 CRUD 및 실시간 피드 업데이트",
@@ -100,7 +100,7 @@ export const projects = [
     slides: [
       {
         header: "주요 기능",
-        image: "/projects/t0.png",
+        image: "/opt/t0.webp",
         groups: [
           {
             title: "",
@@ -117,7 +117,7 @@ export const projects = [
       },
       {
         header: "게시 기능",
-        image: "/projects/t1.gif",
+        image: "/opt/t1.mp4",
         groups: [
           {
             title: "게시글 작성",
@@ -139,7 +139,7 @@ export const projects = [
       },
       {
         header: "이미지 업로드 기능",
-        image: "/projects/t2.gif",
+        image: "/opt/t2.mp4",
         groups: [
           {
             title: "커스텀 파일 업로드 UI",
@@ -161,7 +161,7 @@ export const projects = [
       },
       {
         header: "좋아요/싫어요 기능",
-        image: "/projects/t3.gif",
+        image: "/opt/t3.mp4",
         groups: [
           {
             title: "좋아요 토글",
@@ -183,7 +183,7 @@ export const projects = [
       },
       {
         header: "댓글 기능",
-        image: "/projects/t4.gif",
+        image: "/opt/t4.mp4",
         groups: [
           {
             title: "다중 계층 댓글 시스템",
@@ -211,7 +211,7 @@ export const projects = [
       "SpringBoot",
       "MariaDB"
     ],
-    cover: "/projects/a0.png",
+    cover: "/opt/a0-card.webp",
     highlights: [
       "QR코드 기반 학원생 출석 체크 시스템",
       "학원생 CRUD 및 반 편성·납부 관리",
@@ -222,7 +222,7 @@ export const projects = [
     slides: [
       {
         header: "주요 기능",
-        image: "/projects/a0.png",
+        image: "/opt/a0.webp",
         groups: [
           {
             title: "",
@@ -238,7 +238,7 @@ export const projects = [
       },
       {
         header: "출석 기능",
-        image: "/projects/a1.gif",
+        image: "/opt/a1.mp4",
         groups: [
           {
             title: "학원생 출석 체크",
@@ -254,7 +254,7 @@ export const projects = [
       },
       {
         header: "공통코드 기능",
-        image: "/projects/a2.gif",
+        image: "/opt/a2.mp4",
         groups: [
           {
             title: "공통코드 관리",
@@ -276,7 +276,7 @@ export const projects = [
       },
       {
         header: "원생 관리 기능",
-        image: "/projects/a3.gif",
+        image: "/opt/a3.mp4",
         groups: [
           {
             title: "원생 정보 관리",
@@ -298,7 +298,7 @@ export const projects = [
       },
       {
         header: "출석 관리 기능",
-        image: "/projects/a4.gif",
+        image: "/opt/a4.mp4",
         groups: [
           {
             title: "출석 현황 대시보드",
@@ -326,7 +326,7 @@ export const projects = [
       "Firebase",
       "mysql"
     ],
-    cover: "/projects/c0.png",
+    cover: "/opt/c0-card.webp",
     highlights: [
       "WebSocket 기반 실시간 양방향 채팅",
       "MutationObserver 활용 무한스크롤 최적화",
@@ -337,7 +337,7 @@ export const projects = [
     slides: [
       {
         header: "주요 기능",
-        image: "/projects/c0.png",
+        image: "/opt/c0.webp",
         groups: [
           {
             title: "",
@@ -353,7 +353,7 @@ export const projects = [
       },
       {
         header: "채팅 기능",
-        image: "/projects/c1.gif",
+        image: "/opt/c1.mp4",
         groups: [
           {
             title: "실시간 WebSocket 통신",
@@ -370,7 +370,7 @@ export const projects = [
       },
       {
         header: "무한스크롤 기능",
-        image: "/projects/c2.gif",
+        image: "/opt/c2.mp4",
         groups: [
           {
             title: "최적화된 무한스크롤",
@@ -387,7 +387,7 @@ export const projects = [
       },
       {
         header: "비속어 체크 기능",
-        image: "/projects/c3.gif",
+        image: "/opt/c3.mp4",
         groups: [
           {
             title: "AI 비속어 자동 감지",
@@ -404,7 +404,7 @@ export const projects = [
       },
       {
         header: "검사 기능",
-        image: "/projects/c4.gif",
+        image: "/opt/c4.mp4",
         groups: [
           {
             title: "전송 전 비속어 사전 검사",
@@ -431,7 +431,7 @@ export const projects = [
       "JavaScript",
       "Firebase"
     ],
-    cover: "/projects/p0.png",
+    cover: "/opt/p0-card.webp",
     highlights: [
       "React 기반 반응형 SPA 포트폴리오",
       "CSS 애니메이션 기반 인터랙티브 히어로 섹션",
@@ -442,7 +442,7 @@ export const projects = [
     slides: [
       {
         header: "주요 기능",
-        image: "/projects/p0.png",
+        image: "/opt/p0.webp",
         groups: [
           {
             title: "",
@@ -458,7 +458,7 @@ export const projects = [
       },
       {
         header: "포트폴리오 사이트",
-        image: "/projects/p1.png",
+        image: "/opt/p1.webp",
         groups: [
           {
             title: "인터랙티브 포트폴리오",
@@ -486,7 +486,7 @@ export const projects = [
       "supabase",
       "MariaDB"
     ],
-    cover: "/projects/aibom1.png",
+    cover: "/opt/aibom1-card.webp",
     highlights: [
       "K-DST / KICCE 기반 영·유아 행동발달 AI 측정",
       "OpenAI API 연동 자동 리포트 생성",
@@ -497,7 +497,7 @@ export const projects = [
     slides: [
       {
         header: "주요 기능",
-        image: "/projects/aibom1.png",
+        image: "/opt/aibom1.webp",
         groups: [
           {
             title: "",
@@ -513,7 +513,7 @@ export const projects = [
       },
       {
         header: "메인페이지",
-        image: "/projects/aibom2.png",
+        image: "/opt/aibom2.webp",
         groups: [
           {
             title: "발달 측정 대시보드",
@@ -530,7 +530,7 @@ export const projects = [
       },
       {
         header: "커뮤니티",
-        image: "/projects/aibom3.png",
+        image: "/opt/aibom3.webp",
         groups: [
           {
             title: "보호자 커뮤니티",
@@ -547,7 +547,7 @@ export const projects = [
       },
       {
         header: "마이페이지",
-        image: "/projects/aibom4.png",
+        image: "/opt/aibom4.webp",
         groups: [
           {
             title: "프로필 및 자녀 관리",
@@ -564,7 +564,7 @@ export const projects = [
       },
       {
         header: "리포트",
-        image: "/projects/aibom5.png",
+        image: "/opt/aibom5.webp",
         groups: [
           {
             title: "AI 자동 리포트",
@@ -591,7 +591,7 @@ export const projects = [
       "TypeScript",
       "supabase"
     ],
-    cover: "/projects/Kkam1.png",
+    cover: "/opt/Kkam1-card.webp",
     highlights: [
       "AI 기반 무인매장 이상현상 실시간 탐지",
       "i18n 다국어 지원 (한/영/일/중)",
@@ -602,7 +602,7 @@ export const projects = [
     slides: [
       {
         header: "주요 기능",
-        image: "/projects/Kkam1.png",
+        image: "/opt/Kkam1.webp",
         groups: [
           {
             title: "",
@@ -618,7 +618,7 @@ export const projects = [
       },
       {
         header: "메인페이지",
-        image: "/projects/Kkam2.png",
+        image: "/opt/Kkam2.webp",
         groups: [
           {
             title: "서비스 소개 랜딩",
@@ -635,7 +635,7 @@ export const projects = [
       },
       {
         header: "다국어 지원",
-        image: "/projects/Kkam3.png",
+        image: "/opt/Kkam3.webp",
         groups: [
           {
             title: "i18n 다국어 시스템",
@@ -652,7 +652,7 @@ export const projects = [
       },
       {
         header: "관리자 페이지",
-        image: "/projects/Kkam4.png",
+        image: "/opt/Kkam4.webp",
         groups: [
           {
             title: "매장 관리 대시보드",
@@ -669,7 +669,7 @@ export const projects = [
       },
       {
         header: "모바일 앱",
-        image: "/projects/Kkam5.png",
+        image: "/opt/Kkam5.webp",
         groups: [
           {
             title: "실시간 모니터링 앱",

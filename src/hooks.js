@@ -12,7 +12,26 @@ export function useReveal() {
     }), { rootMargin: '0px 0px -10% 0px', threshold: 0.1 })
     els.forEach((e) => io.observe(e))
     return () => io.disconnect()
-  })
+  }, [])
+}
+
+/** '2y 10m', '9' 같은 문자열 속 숫자를 0부터 올라가게 */
+export function useCountUp(text, run, dur = 1200) {
+  const [v, setV] = useState(() => (reduced() ? text : text.replace(/\d+/g, '0')))
+  useEffect(() => {
+    if (!run || reduced()) { if (reduced()) setV(text); return }
+    let raf = 0
+    const t0 = performance.now()
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur)
+      const e = 1 - Math.pow(1 - p, 3)
+      setV(text.replace(/\d+/g, (n) => String(Math.round(Number(n) * e))))
+      if (p < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [text, run, dur])
+  return v
 }
 
 /** 지금 보고 있는 섹션 id */
