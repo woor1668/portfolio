@@ -27,7 +27,7 @@
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 72px; background: var(--bg); color-scheme: dark; scrollbar-color: var(--line2) var(--bg); }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.7 var(--sans); letter-spacing: -.01em; -webkit-font-smoothing: antialiased; padding-bottom: 28px; }
+body { margin: 0; color: var(--ink); font: 400 16px/1.7 var(--sans); letter-spacing: -.01em; -webkit-font-smoothing: antialiased; padding-bottom: 28px; }
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -51,6 +51,29 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 .c-dir { color: var(--cyan); }
 .link { text-decoration: underline; text-decoration-color: #a5d6ff55; text-underline-offset: 3px; }
 .link:hover { text-decoration-color: currentColor; }
+
+/* 섹션별 배경 색 — 미리 만든 층의 투명도만 바꿔서 가볍게 전환 */
+.bg-tones { position: fixed; inset: 0; z-index: -3; pointer-events: none; }
+.bg-tones i { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; will-change: opacity; }
+.bg-tones i[data-k='top'] { background: radial-gradient(1000px 700px at 15% 10%, #7ee7871f, transparent 70%), radial-gradient(800px 600px at 90% 40%, #79c0ff14, transparent 70%); }
+.bg-tones i[data-k='about'] { background: radial-gradient(1100px 700px at 80% 20%, #79c0ff24, transparent 70%), radial-gradient(800px 600px at 0% 90%, #3a5bff14, transparent 70%); }
+.bg-tones i[data-k='skills'] { background: radial-gradient(1100px 700px at 20% 30%, #d2a8ff22, transparent 70%), radial-gradient(800px 600px at 100% 80%, #ff7b7212, transparent 70%); }
+.bg-tones i[data-k='career'] { background: radial-gradient(1100px 700px at 85% 25%, #ffa65720, transparent 70%), radial-gradient(800px 600px at 5% 80%, #e3b34114, transparent 70%); }
+.bg-tones i[data-k='projects'] { background: radial-gradient(1100px 700px at 15% 25%, #56d4dd20, transparent 70%), radial-gradient(800px 600px at 95% 85%, #7ee78714, transparent 70%); }
+html[data-sec='top'] .bg-tones i[data-k='top'], html[data-sec='about'] .bg-tones i[data-k='about'], html[data-sec='skills'] .bg-tones i[data-k='skills'],
+html[data-sec='career'] .bg-tones i[data-k='career'], html[data-sec='projects'] .bg-tones i[data-k='projects'], html:not([data-sec]) .bg-tones i[data-k='top'] { opacity: 1; }
+/* 섹션 색이 강조색에도 반영 */
+html { --tone: var(--green); }
+html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone: var(--purple); } html[data-sec='career'] { --tone: var(--orange); } html[data-sec='projects'] { --tone: var(--cyan); }
+.status__bar, .nav__tabs a.is-on::after { background: var(--tone); transition: background .6s; }
+.shead__no { transition: color .6s; }
+
+/* 흐르는 코드 */
+.rain { position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  opacity: .5;
+  mask-image: linear-gradient(90deg, #000 0%, #0006 22%, #0002 45%, #0002 55%, #0006 78%, #000 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #0006 22%, #0002 45%, #0002 55%, #0006 78%, #000 100%); }
+@media (max-width: 760px) { .rain { opacity: .35; } }
 
 /* 배경 격자 */
 .bg-grid { position: fixed; inset: 0; z-index: -1; pointer-events: none; transform: translateZ(0);
@@ -86,7 +109,7 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 .nav__tabs a { position: relative; padding: 6px 12px; border-radius: 7px; font: 500 12.5px var(--mono); color: var(--ink2); transition: color .2s, background .2s; }
 .nav__tabs a:hover { color: var(--ink); background: #ffffff08; }
 .nav__tabs a.is-on { color: var(--ink); background: var(--panel2); }
-.nav__tabs a.is-on::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; border-radius: 2px; background: var(--blue); }
+.nav__tabs a.is-on::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 2px; border-radius: 2px; background: var(--tone); transition: background .6s; }
 .nav__cmd { display: flex; align-items: center; gap: 10px; height: 32px; padding: 0 8px 0 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg2); color: var(--ink3); font: 12px var(--mono); transition: border-color .2s, color .2s; }
 .nav__cmd:hover { border-color: var(--line2); color: var(--ink2); }
 .nav__burger { display: none; width: 36px; height: 36px; border-radius: 8px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
@@ -218,8 +241,10 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 /* Projects */
 .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .pcard { min-width: 0; }
-.pcard__hit { display: flex; flex-direction: column; width: 100%; height: 100%; text-align: left; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); overflow: hidden; transition: border-color .3s, transform .4s var(--ease), box-shadow .4s; }
-.pcard__hit:hover { border-color: var(--line2); transform: translateY(-6px); box-shadow: 0 30px 60px -30px #000, 0 0 0 1px #79c0ff22; }
+.pcard__hit { position: relative; display: flex; flex-direction: column; width: 100%; height: 100%; text-align: left; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); overflow: hidden; transition: border-color .3s, transform .25s ease-out, box-shadow .4s; transform-style: preserve-3d; }
+.pcard__spot { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), #79c0ff1f, transparent 45%); }
+.pcard__hit:hover .pcard__spot { opacity: 1; }
+.pcard__hit:hover { border-color: var(--line2); box-shadow: 0 30px 60px -30px #000, 0 0 0 1px #79c0ff22; }
 .pcard__bar { display: flex; align-items: center; gap: 12px; height: 32px; padding: 0 12px; border-bottom: 1px solid var(--line); font: 11.5px var(--mono); color: var(--ink3); }
 .pcard__bar .nav__dots i { width: 8px; height: 8px; }
 .pcard__shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg2); border-bottom: 1px solid var(--line); }
@@ -302,7 +327,7 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 .status__sp { flex: 1; }
 .status__top { font: inherit; color: var(--ink2); padding: 2px 8px; border-radius: 5px; }
 .status__top:hover { background: var(--panel2); color: var(--ink); }
-.status__bar { position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--green); transform-origin: left; }
+.status__bar { position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--tone); transition: background .6s; transform-origin: left; }
 
 
 /* =========================================================
@@ -313,9 +338,8 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 .shead:not(.is-in) .shead__type { width: 0; }
 .shead.is-in .shead__type { animation: typeW calc(var(--n) * 45ms) steps(var(--n)) .1s both; border-right: 1px solid transparent; }
 @keyframes typeW { from { width: 0; } }
-.shead__mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
-.shead__mask > span { display: inline-block; transform: translateY(105%); transition: transform 1s var(--ease) .15s; }
-.shead.is-in .shead__mask > span { transform: none; }
+.shead__title { white-space: pre; min-height: 1em; }
+.shead__cursor { display: inline-block; width: .08em; height: .82em; margin-left: .08em; vertical-align: -.04em; background: var(--tone); animation: blink 1s steps(1) infinite; }
 .shead__desc { opacity: 0; transition: opacity .8s .45s; }
 .shead.is-in .shead__desc { opacity: 1; }
 [data-reveal].shead { opacity: 1; translate: none; }
@@ -397,5 +421,5 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
   [data-reveal], .editor__line, .skill li, .diff, .about__photo { opacity: 1 !important; translate: none; transform: none !important; }
   .pcard__shot { clip-path: none; }
   .shead__type, .footer__type { width: auto !important; }
-  .shead__mask > span { transform: none; }
+
 }

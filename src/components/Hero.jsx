@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { profile, projects, stats } from '../data'
-import { useCountUp, useTyping } from '../hooks'
+import { useCountUp, useScramble, useTyping } from '../hooks'
 
 function Stat({ value, label, run }) {
   const v = useCountUp(value, run)
@@ -33,6 +33,7 @@ export default function Hero({ onPalette }) {
     addEventListener('pointermove', on, { passive: true })
     return () => { removeEventListener('pointermove', on); cancelAnimationFrame(raf) }
   }, [])
+  const name = useScramble(profile.name, true, { delay: 600, speed: 40 })
   const [statsOn, setStatsOn] = useState(false)
   useEffect(() => { const t = setTimeout(() => setStatsOn(true), 700); return () => clearTimeout(t) }, [])
 
@@ -44,7 +45,7 @@ export default function Hero({ onPalette }) {
         <div className="hero__copy">
           <h1 className="hero__title">
             <span className="hero__line"><span className="c-com">{'//'}</span> {profile.role}</span>
-            <span className="hero__line hero__big">웹 개발자<br /><em>{profile.name}</em>입니다.</span>
+            <span className="hero__line hero__big">웹 개발자<br /><em aria-label={profile.name}>{name}</em>입니다.</span>
           </h1>
           <p className="hero__sub">대학 정보시스템을 운영해 온 경험으로,<br />사용자에게 꼭 필요한 기능부터 만듭니다.</p>
           <div className="hero__stats">

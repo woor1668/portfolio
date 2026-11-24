@@ -3,6 +3,19 @@ import { projects } from '../data'
 import { useModal } from '../hooks'
 import SectionHead from './SectionHead'
 
+// 마우스 위치에 따라 카드가 살짝 기울고 빛이 따라다님 (호버한 카드만)
+const tilt = (e) => {
+  if (e.pointerType !== 'mouse') return
+  const el = e.currentTarget
+  const r = el.getBoundingClientRect()
+  const x = (e.clientX - r.left) / r.width
+  const y = (e.clientY - r.top) / r.height
+  el.style.setProperty('--mx', `${x * 100}%`)
+  el.style.setProperty('--my', `${y * 100}%`)
+  el.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 6}deg) rotateY(${(x - 0.5) * 8}deg) translateY(-6px)`
+}
+const untilt = (e) => { e.currentTarget.style.transform = '' }
+
 const team = (people) => {
   const n = parseInt(people, 10)
   return n === 1 ? '1인' : `${n}인 팀`
@@ -90,7 +103,8 @@ export default function Projects({ open, setOpen }) {
       <div className="projects">
         {list.map((p, i) => (
           <article key={p.slug} className="pcard" data-reveal style={{ '--d': `${(i % 3) * 70}ms` }}>
-            <button className="pcard__hit" onClick={() => setOpen(p.slug)} aria-label={`${p.title} 자세히 보기`}>
+            <button className="pcard__hit" onClick={() => setOpen(p.slug)} aria-label={`${p.title} 자세히 보기`} onPointerMove={tilt} onPointerLeave={untilt}>
+              <span className="pcard__spot" aria-hidden="true" />
               <div className="pcard__bar">
                 <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
                 <span>{p.slug}</span>
