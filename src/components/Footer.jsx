@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <p className="footer__big" data-reveal>
-        <span className="c-com">{'/* '}</span>함께 만들 이야기가 있다면<span className="c-com">{' */'}</span><br />
+        <span className="footer__label">Contact</span><br />
         <a href={`mailto:${profile.email}`} className="footer__mail"><span className="footer__type" style={{ '--n': profile.email.length }}>{profile.email}</span><i>↗</i></a>
       </p>
       <div className="footer__row">

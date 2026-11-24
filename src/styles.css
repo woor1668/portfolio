@@ -114,8 +114,10 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 .hero__line:nth-child(1) { font: 500 clamp(15px, 1.4vw, 18px)/1.4 var(--mono); letter-spacing: 0; margin-bottom: 14px; animation-delay: .2s; }
 .hero__line:nth-child(2) { animation-delay: .32s; }
 .hero__line:nth-child(3) { animation-delay: .44s; }
-.hero__big { font-size: clamp(40px, 6.2vw, 84px); line-height: 1.08; }
+.hero__big { font-size: clamp(44px, 6.6vw, 92px); line-height: 1.06; }
 .hero__big em { font-style: normal; background: linear-gradient(90deg, var(--green), var(--blue)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__sub { margin-top: 22px; max-width: 520px; color: var(--ink2); font-size: clamp(15px, 1.25vw, 17px); line-height: 1.75; animation: up .9s .5s var(--ease) both; }
+.footer__label { font: 500 14px var(--mono); color: var(--ink3); letter-spacing: .08em; text-transform: uppercase; }
 .hero__stats { display: flex; gap: clamp(20px, 3vw, 44px); margin-top: 36px; animation: up .9s .6s var(--ease) both; }
 .hero__stats div { display: grid; gap: 2px; }
 .hero__stats b { font: 700 clamp(22px, 2.2vw, 28px) var(--mono); letter-spacing: -.02em; }

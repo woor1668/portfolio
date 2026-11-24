@@ -9,8 +9,6 @@ const BRANCHES = [
   { key: 'server', label: 'server', color: 'orange' },
   { key: 'database', label: 'database', color: 'yellow' },
 ]
-// 기간 문자열로 만든 짧은 가짜 커밋 해시 (매번 같은 값)
-const hash = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7).toString(16).padStart(7, '0').slice(0, 7)
 
 export default function Career() {
   const [branch, setBranch] = useState('all')
@@ -38,7 +36,6 @@ export default function Career() {
               <div className="commit__graph" aria-hidden="true"><i /></div>
               <div className="commit__body">
                 <p className="commit__top">
-                  <span className="commit__hash">{hash(c.year)}</span>
                   <span className="commit__tag">tag: {c.tag}</span>
                   <span className="commit__date">{c.year}</span>
                 </p>

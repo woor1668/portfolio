@@ -14,8 +14,6 @@ const LINES = [
   { type: 'out', text: `"${profile.tagline}"` },
   { type: 'cmd', text: 'ls projects/' },
   { type: 'ls', text: projects.map((p) => p.slug).join('  ') },
-  { type: 'cmd', text: 'git log --oneline -1' },
-  { type: 'out', text: 'a1b2c3d  feat: 사용자 관점에서 먼저 고민하기' },
 ]
 
 export default function Hero({ onPalette }) {
@@ -44,12 +42,11 @@ export default function Hero({ onPalette }) {
       <div className="hero__glow" ref={glow} aria-hidden="true" />
       <div className="hero__inner">
         <div className="hero__copy">
-          <p className="hero__kicker"><span className="c-com">{'//'} Welcome to my Portfolio</span></p>
           <h1 className="hero__title">
-            <span className="hero__line"><span className="c-key">const</span> <span className="c-var">developer</span> <span className="c-op">=</span></span>
-            <span className="hero__line hero__big">사람과 사람을<br />연결하는 개발자,</span>
-            <span className="hero__line hero__big"><em>{profile.name}</em>입니다<span className="c-op">;</span></span>
+            <span className="hero__line"><span className="c-com">{'//'}</span> {profile.role}</span>
+            <span className="hero__line hero__big">웹 개발자<br /><em>{profile.name}</em>입니다.</span>
           </h1>
+          <p className="hero__sub">대학 정보시스템을 운영해 온 경험으로,<br />사용자에게 꼭 필요한 기능부터 만듭니다.</p>
           <div className="hero__stats">
             {stats.map((s) => <Stat key={s.label} {...s} run={statsOn} />)}
           </div>
