@@ -184,8 +184,14 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 
 .editor { border: 1px solid var(--line); border-radius: var(--r); background: #0d1117; overflow: hidden; display: flex; flex-direction: column; }
 .editor__tabs { display: flex; background: var(--panel); border-bottom: 1px solid var(--line); }
-.editor__tabs span { padding: 10px 16px; font: 12.5px var(--mono); color: var(--ink3); border-right: 1px solid var(--line); }
-.editor__tabs span.is-on { color: var(--ink); background: #0d1117; box-shadow: inset 0 2px var(--blue); }
+.editor__tabs button { padding: 10px 16px; font: 12.5px var(--mono); color: var(--ink3); border-right: 1px solid var(--line); transition: color .2s, background .2s; }
+.editor__tabs button:hover { color: var(--ink2); background: #ffffff06; }
+.editor__tabs button.is-on { color: var(--ink); background: #0d1117; box-shadow: inset 0 2px var(--blue); }
+.editor__tabs button:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.editor__code.is-md .editor__line > span:last-child { white-space: pre-wrap; padding-right: 20px; }
+.md-h { color: var(--blue); font-weight: 700; }
+.md-q { color: var(--ink2); font-style: italic; }
+.md-b { color: var(--ink); font-weight: 700; }
 .editor__code { margin: 0; padding: 18px 0; font: 14px/1.9 var(--mono); overflow-x: auto; flex: 1; }
 .editor__code code { display: grid; }
 .editor__line { display: grid; grid-template-columns: 56px 1fr; white-space: pre; }
@@ -207,6 +213,11 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 
 /* Career */
 .career { border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); overflow: hidden; }
+.career__list { display: grid; gap: 16px; }
+.career.is-now { border-color: color-mix(in srgb, var(--green) 40%, var(--line)); }
+.career:not(:has(.commits)) .career__head { border-bottom: 0; }
+.career__now { display: inline-flex; align-items: center; gap: 6px; margin-left: 12px; vertical-align: 4px; font: 500 12px var(--mono); color: var(--green); letter-spacing: 0; }
+.career__filter--top { margin-bottom: 16px; }
 .career__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--line); }
 .career__co { font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
 .career__meta { font: 13px var(--mono); color: var(--ink2); }

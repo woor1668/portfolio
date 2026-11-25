@@ -1,5 +1,15 @@
 /** 사이트 내용 — 여기만 고치면 화면 전체에 반영됩니다 */
 
+// 'YYYY.MM' 두 개 사이 개월 수 (양 끝 달 포함). end 가 없으면 이번 달까지
+const months = (start, end) => {
+  const [sy, sm] = start.split('.').map(Number)
+  const now = new Date()
+  const [ey, em] = end ? end.split('.').map(Number) : [now.getFullYear(), now.getMonth() + 1]
+  return (ey - sy) * 12 + (em - sm) + 1
+}
+const ko = (m) => [Math.floor(m / 12) && `${Math.floor(m / 12)}년`, m % 12 && `${m % 12}개월`].filter(Boolean).join(' ')
+const short = (m) => `${Math.floor(m / 12)}y ${m % 12}m`
+
 export const profile = {
   name: '이재봉',
   nameEn: 'Jaebong Lee',
@@ -11,8 +21,9 @@ export const profile = {
   photo: '/profile.webp',
   lead: '사용자가 실제로 겪는 불편에서 출발해 기능을 만듭니다.',
   body: [
-    '2년 10개월 동안 9개 대학의 NCS·포털·SSO 시스템을 운영하며 프론트엔드, 백엔드, 서버, DB를 함께 다뤘습니다.',
-    '이후 React·TypeScript로 출석 관리, 실시간 채팅, AI 발달 리포트 같은 서비스를 직접 설계하고 만들었습니다.',
+    '신나는플랫폼에서 2년 10개월 동안 9개 대학의 NCS·포털·SSO 시스템을 운영하며 프론트엔드, 백엔드, 서버, DB를 함께 다뤘습니다.',
+    'React·TypeScript로 출석 관리, 실시간 채팅, AI 발달 리포트 같은 서비스를 직접 설계하고 만들었습니다.',
+    '2025년 11월부터 메타노빅스에서 일하고 있습니다.',
   ],
   stack: ['React', 'TypeScript', 'Java · Spring'],
 }
@@ -36,43 +47,42 @@ export const skills = [
   { group: 'ci/cd', items: [['Jenkins', 'SiJenkins', '#D24939']] },
 ]
 
-export const company = { name: '신나는플랫폼', duration: '2년 10개월', period: '2021.10 — 2024.07' }
+/** 회사별 경력 — 위에서부터 최신순. end 를 비우면 '현재'로 표시되고 기간이 자동 계산됩니다 */
+export const companies = [
+  {
+    name: '메타노빅스',
+    start: '2025.11',
+    end: null,
+    // 담당 업무를 적으면 커밋처럼 표시됩니다 (main/front/back/server/database)
+    commits: [],
+  },
+  {
+    name: '신나는플랫폼',
+    start: '2021.10',
+    end: '2024.07',
+    commits: [
+      {
+        year: '2021.10 — 2024.07',
+        tag: 'v1.0 → v3.0',
+        title: '9개 대학 NCS · 포털 · SSO 시스템 운영 및 개발',
+        main: ['9개 대학 NCS 시스템 오류 수정 및 기능 개발', '신안산대 NCS 개발 PL 수행', 'OZ report 유지보수'],
+        front: ['JS·jQuery로 NCS 시스템과 동국대 SSO 화면 개발', 'Angular 중앙대 포털, WebSquare 신성대 종합정보시스템', 'Nexacro 유한대 학생이력시스템'],
+        back: ['Java·Spring으로 NCS·포털·SSO 유지보수 및 개발'],
+        server: ['7개 대학 Linux 서버 운영', '동국대 포털·SSO 서버 복구, 사내 서버 AWS 이관'],
+        database: ['Oracle(7개 대학)·MySQL(2개 대학) NCS DB 관리'],
+      },
+    ],
+  },
+].map((c) => {
+  const m = months(c.start, c.end)
+  return { ...c, months: m, period: `${c.start} — ${c.end ?? '현재'}`, duration: ko(m) }
+})
 
-export const career = [
-  {
-    year: '2021.10 — 2022.09',
-    tag: 'v1.0',
-    title: '대학 NCS 시스템 유지보수 · SSO · 학생이력시스템 개발',
-    main: ['대학 NCS(국가직무능력표준) 프로그램 오류 수정 및 개발', '대학 NCS 서버 유지보수 및 개발', 'OZ report 유지보수 및 개발'],
-    front: ['JQuery를 활용한 동국대 SSO화면 로그인 개발', 'Nexcaro를 활용한 유한대 학생이력시스템 개발', 'JS를 활용한 9개 대학 NCS 시스템 유지보수 및 개발'],
-    back: ['Java를 활용한 9개 대학 NCS 시스템 유지보수 및 개발', 'Java를 활용한 동국대 SSO 및 유한대 학생이력시스템 개발'],
-    server: ['7개 대학 Linux 시스템 유지보수 및 개발', '사내 서버 관리'],
-    database: ['Oracle을 활용한 7개 대학 NCS 관리', 'MySQL을 활용한 2개 대학 NCS 관리'],
-  },
-  {
-    year: '2022.10 — 2023.09',
-    tag: 'v2.0',
-    title: '신안산대 NCS PL · 중앙대 포털 · 서버 복구',
-    main: ['대학 NCS 프로그램 오류 수정 및 개발', '대학 NCS 서버 유지보수 및 개발', 'OZ report 유지보수 및 개발', '신안산대 NCS 개발 및 PL 수행'],
-    front: ['Angular를 활용한 중앙대 포털 관리', 'JS를 활용한 9개 대학 NCS 시스템 유지보수 및 개발', 'JQuery 활용한 동국대 포털 및 미래융합교육원 SSO 유지보수 및 개발'],
-    back: ['Java를 활용한 9개 대학 NCS 시스템 유지보수 및 개발', 'Java를 활용한 중앙대 포털 및 동국대, 미래융합교육원 SSO 유지보수 및 개발'],
-    server: ['7개 대학 Linux 시스템 유지보수 및 개발', '사내 서버 관리', '동국대 포털, SSO, 미래융합교육원 서버 복구 작업'],
-    database: ['Oracle을 활용한 7개 대학 NCS 관리', 'MySQL을 활용한 2개 대학 NCS 관리'],
-  },
-  {
-    year: '2023.10 — 2024.07',
-    tag: 'v3.0',
-    title: '신성대 종합정보시스템 · AWS 이관',
-    main: ['대학 NCS 프로그램 오류 수정 및 개발', '대학 NCS 서버 유지보수 및 개발', 'OZ report 유지보수 및 개발'],
-    front: ['WebSqure를 활용한 신성대 종합정보시스템 유지보수 및 개발', 'JS를 활용한 9개 대학 NCS 시스템 유지보수 및 개발'],
-    back: ['Java를 활용한 중앙대 포털 유지보수 및 개발', 'Spring을 활용한 신성대 종합정보시스템 유지보수 및 개발'],
-    server: ['7개 대학 Linux 시스템 유지보수 및 개발', '사내 사옥 이전으로 인한 회사 정보 AWS 이관 작업'],
-    database: ['Oracle을 활용한 7개 대학 NCS 관리', 'MySQL을 활용한 2개 대학 NCS 관리'],
-  },
-]
+export const totalMonths = companies.reduce((a, c) => a + c.months, 0)
+export const experience = { short: short(totalMonths), ko: ko(totalMonths) }
 
 export const stats = [
-  { value: '2y 10m', label: '실무 경력' },
+  { value: experience.short, label: '실무 경력' },
   { value: '9', label: '대학 시스템 운영' },
   { value: '6', label: '개인·팀 프로젝트' },
 ]
