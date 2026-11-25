@@ -170,7 +170,13 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 .shead__desc { font: 13.5px var(--mono); color: var(--ink2); }
 
 /* About */
-.about { display: grid; }
+.about { display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: stretch; }
+.about__card { padding: 28px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); display: grid; align-content: center; justify-items: center; text-align: center; gap: 6px; }
+.about__photo { width: 104px; height: 104px; border-radius: 50%; overflow: hidden; margin-bottom: 14px; border: 2px solid var(--line2); box-shadow: 0 0 0 5px #7ee78712; }
+.about__photo img { width: 100%; height: 100%; object-fit: cover; }
+.about__name { font-size: 24px; font-weight: 800; letter-spacing: -.03em; }
+.about__name span { display: block; font: 500 13px var(--mono); color: var(--ink3); letter-spacing: 0; margin-top: 2px; }
+.about__role { font: 13px var(--mono); color: var(--ink2); display: flex; align-items: center; gap: 8px; margin-top: 6px; }
 .dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 #7ee78780; animation: live 2s infinite; }
 @keyframes live { 70% { box-shadow: 0 0 0 8px #7ee78700; } 100% { box-shadow: 0 0 0 0 #7ee78700; } }
 
@@ -511,5 +517,10 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 /* 터미널 ls: 프로젝트 이름을 누르면 카드로 이동 */
 .term__ls button { color: var(--blue); font: inherit; font-weight: 500; padding: 0; cursor: pointer; text-underline-offset: 3px; }
 .term__ls button:hover { text-decoration: underline; color: var(--ink); }
+.about__photo { transform: scale(.85); opacity: 0; transition: transform .8s var(--ease) .2s, opacity .6s .2s; }
+.about__card.is-in .about__photo { transform: none; opacity: 1; }
+.about__photo { position: relative; overflow: visible; }
+.about__photo img { border-radius: 50%; position: relative; }
+.about__ring { position: absolute; inset: -7px; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 60%, var(--green) 80%, var(--blue) 95%, transparent); -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); mask: radial-gradient(closest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); animation: spin 6s linear infinite; opacity: .9; }
 .pcard.is-flash { animation: pflash 1.8s var(--ease); border-radius: var(--r); }
 @keyframes pflash { 0%, 60% { box-shadow: 0 0 0 2px var(--blue), 0 0 40px -6px var(--blue); } 100% { box-shadow: 0 0 0 0 transparent; } }

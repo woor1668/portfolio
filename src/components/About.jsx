@@ -42,6 +42,11 @@ export default function About() {
     <section className="section" id="about">
       <SectionHead no="01" file="about.ts" title="About Me" />
       <div className="about">
+        <div className="about__card" data-reveal>
+          <div className="about__photo"><span className="about__ring" aria-hidden="true" /><img src={profile.photo} alt={`${profile.name} 프로필`} width="104" height="104" loading="lazy" /></div>
+          <p className="about__name">{profile.name} <span>{profile.nameEn}</span></p>
+          <p className="about__role"><span className="dot-live" /> {profile.role}</p>
+        </div>
         <div className="editor" data-reveal>
           <div className="editor__tabs" role="tablist" aria-label="파일">
             <button role="tab" aria-selected={tab === 'md'} className={tab === 'md' ? 'is-on' : ''} onClick={() => setTab('md')}><i className="ext ext--md" />README.md</button>
