@@ -257,7 +257,6 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 .commit__graph { position: relative; display: flex; justify-content: center; }
 .commit__graph::before { content: ''; position: absolute; top: 0; bottom: 0; width: 2px; background: var(--line2); }
 .commit:first-child .commit__graph::before { top: 30px; }
-.commit:last-child .commit__graph::before { bottom: auto; height: 30px; }
 .commit__graph i { position: relative; margin-top: 24px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 3px solid var(--green); box-shadow: 0 0 0 4px var(--panel); }
 .commit__body { padding: 18px 24px 24px 0; border-bottom: 1px dashed var(--line); }
 .commit:last-child .commit__body { border-bottom: 0; }
