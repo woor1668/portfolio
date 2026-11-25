@@ -120,7 +120,7 @@ export default function Projects({ open, setOpen }) {
       <SectionHead no="04" file="projects/" title="Projects" desc="카드를 누르면 기능별 화면과 설명을 볼 수 있습니다." />
       <div className="projects">
         {list.map((p, i) => (
-          <article key={p.slug} className="pcard" data-reveal style={{ '--d': `${(i % 3) * 70}ms` }}>
+          <article key={p.slug} id={`p-${p.slug}`} className="pcard" data-reveal style={{ '--d': `${(i % 3) * 70}ms` }}>
             <button className="pcard__hit" onClick={() => setOpen(p.slug)} aria-label={`${p.title} 자세히 보기`} onPointerMove={tilt} onPointerLeave={untilt}>
               <span className="pcard__spot" aria-hidden="true" />
               <div className="pcard__bar">

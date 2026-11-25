@@ -16,6 +16,27 @@ const LINES = [
   { type: 'ls', text: projects.map((p) => p.slug).join('  ') },
 ]
 
+// ls 결과의 프로젝트 이름을 누르면 Projects 섹션의 해당 카드로 내려가 잠깐 강조한다
+const goProject = (slug) => {
+  const card = document.getElementById(`p-${slug}`)
+  if (!card) return
+  // 내려가는 동안 위쪽 섹션 높이가 바뀔 수 있어서, 멈출 때마다 위치를 확인해 다시 맞춘 뒤 강조한다
+  let tries = 0
+  const go = () => card.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  const flash = () => {
+    card.classList.remove('is-flash')
+    void card.offsetWidth
+    card.classList.add('is-flash')
+    setTimeout(() => card.classList.remove('is-flash'), 1800)
+  }
+  const check = () => {
+    const off = Math.abs(card.getBoundingClientRect().top + card.offsetHeight / 2 - innerHeight / 2)
+    if (off > 40 && tries++ < 3) { go(); setTimeout(check, 700) } else flash()
+  }
+  go()
+  setTimeout(check, 900)
+}
+
 export default function Hero({ onPalette }) {
   const [out, done] = useTyping(LINES)
   const glow = useRef(null)
@@ -46,7 +67,7 @@ export default function Hero({ onPalette }) {
             <span className="hero__line"><span className="c-com">{'//'}</span> {profile.role}</span>
             <span className="hero__line hero__big">웹 개발자<br /><em>{profile.name}</em>입니다.</span>
           </h1>
-          <p className="hero__sub">대학 정보시스템을 운영해 온 경험으로,<br />사용자에게 꼭 필요한 기능부터 만듭니다.</p>
+          <p className="hero__sub">대학 정보시스템 운영부터 철도·제조 데이터 플랫폼까지,<br />사용자에게 꼭 필요한 기능부터 만듭니다.</p>
           <div className="hero__stats">
             {stats.map((s) => <Stat key={s.label} {...s} run={statsOn} />)}
           </div>
@@ -70,7 +91,7 @@ export default function Hero({ onPalette }) {
               const text = out[i]
               const typing = i === out.length - 1 && !done && l.type === 'cmd'
               if (l.type === 'cmd') return <p key={i}><span className="c-ok">➜</span> <span className="c-dir">~</span> {text}{typing && <span className="caret" />}</p>
-              if (l.type === 'ls') return <p key={i} className="term__ls">{text.split('  ').map((t) => <span key={t}>{t}/</span>)}</p>
+              if (l.type === 'ls') return <p key={i} className="term__ls">{text.split('  ').map((t) => projects.some((p) => p.slug === t) ? <button key={t} type="button" tabIndex={-1} onClick={() => goProject(t)}>{t}/</button> : <span key={t}>{t}/</span>)}</p>
               return <p key={i} className="term__out">{text}</p>
             })}
             {done && <p><span className="c-ok">➜</span> <span className="c-dir">~</span> <span className="caret" /></p>}

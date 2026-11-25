@@ -21,9 +21,9 @@ export const profile = {
   photo: '/profile.webp',
   lead: '사용자가 실제로 겪는 불편에서 출발해 기능을 만듭니다.',
   body: [
+    '2025년 11월부터 메타노빅스에서 철도·제조 현장 데이터를 다루는 모니터링 시스템과 AI 학습 플랫폼을 만들고 있습니다.',
     '신나는플랫폼에서 2년 10개월 동안 9개 대학의 NCS·포털·SSO 시스템을 운영하며 프론트엔드, 백엔드, 서버, DB를 함께 다뤘습니다.',
     '개인 프로젝트로 스타리그 육성 게임, 사주로 고르는 부적 앱, AI 캐릭터 채팅, 로또 예측 서비스 등을 직접 설계하고 만들고 있습니다.',
-    '2025년 11월부터 메타노빅스에서 철도·제조 현장 데이터를 다루는 모니터링 시스템과 AI 학습 플랫폼을 만들고 있습니다.',
   ],
   stack: ['React', 'Svelte', 'TypeScript', 'Java · Spring'],
 }
@@ -820,6 +820,7 @@ export const projects = [
 
 export const stats = [
   { value: experience.short, label: '실무 경력' },
-  { value: '9', label: '대학 시스템 운영' },
+  // 신나는플랫폼에서 운영한 대학 시스템 9개 + 메타노빅스에서 만든 시스템
+  { value: String(9 + companies[0].commits.length), label: '운영·개발한 시스템' },
   { value: String(projects.length), label: '개인·팀 프로젝트' },
 ]

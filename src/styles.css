@@ -170,17 +170,9 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 .shead__desc { font: 13.5px var(--mono); color: var(--ink2); }
 
 /* About */
-.about { display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: stretch; }
-.about__card { padding: 28px; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); display: grid; align-content: start; gap: 6px; }
-.about__photo { width: 104px; height: 104px; border-radius: 50%; overflow: hidden; margin-bottom: 14px; border: 2px solid var(--line2); box-shadow: 0 0 0 5px #7ee78712; }
-.about__photo img { width: 100%; height: 100%; object-fit: cover; }
-.about__name { font-size: 24px; font-weight: 800; letter-spacing: -.03em; }
-.about__name span { font: 500 13px var(--mono); color: var(--ink3); margin-left: 6px; letter-spacing: 0; }
-.about__role { font: 13px var(--mono); color: var(--ink2); display: flex; align-items: center; gap: 8px; }
+.about { display: grid; }
 .dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 #7ee78780; animation: live 2s infinite; }
 @keyframes live { 70% { box-shadow: 0 0 0 8px #7ee78700; } 100% { box-shadow: 0 0 0 0 #7ee78700; } }
-.about__lead { margin-top: 18px; font-size: 18px; font-weight: 700; line-height: 1.5; letter-spacing: -.02em; }
-.about__body { display: grid; gap: 4px; color: var(--ink2); font-size: 15px; }
 
 .editor { border: 1px solid var(--line); border-radius: var(--r); background: #0d1117; overflow: hidden; display: flex; flex-direction: column; }
 .editor__tabs { display: flex; background: var(--panel); border-bottom: 1px solid var(--line); }
@@ -381,8 +373,6 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 .editor__line { opacity: 0; transform: translateX(-8px); transition: opacity .4s, transform .5s var(--ease); transition-delay: calc(var(--i) * 55ms + .25s); }
 .editor.is-in .editor__line { opacity: 1; transform: none; }
 .caret--thin { width: 2px; background: var(--blue); }
-.about__photo { transform: scale(.85); opacity: 0; transition: transform .8s var(--ease) .2s, opacity .6s .2s; }
-.about__card.is-in .about__photo { transform: none; opacity: 1; }
 
 /* Skills: 칩이 순서대로 */
 .skill li { opacity: 0; transform: translateY(8px) scale(.96); transition: opacity .4s, transform .5s var(--ease), border-color .2s, background .2s; transition-delay: calc(var(--d, 0ms) + var(--i) * 60ms + .2s), calc(var(--d, 0ms) + var(--i) * 60ms + .2s), 0s, 0s; }
@@ -454,9 +444,6 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
    등장 후에도 계속 살아 있는 동작 — 모두 transform/opacity, 화면 밖 섹션은 그리지 않음
    ========================================================= */
 /* About: 프로필 링 회전, 에디터 현재 줄 하이라이트가 코드를 따라 내려감 */
-.about__photo { position: relative; overflow: visible; }
-.about__photo img { border-radius: 50%; position: relative; }
-.about__ring { position: absolute; inset: -7px; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 60%, var(--green) 80%, var(--blue) 95%, transparent); -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); mask: radial-gradient(closest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); animation: spin 6s linear infinite; opacity: .9; }
 @keyframes spin { to { transform: rotate(1turn); } }
 .editor__code { position: relative; }
 .editor__hl { position: absolute; left: 0; right: 0; top: 18px; height: calc(14px * 1.9); background: linear-gradient(90deg, #79c0ff14, #79c0ff05 60%, transparent); box-shadow: inset 2px 0 var(--blue); pointer-events: none; opacity: 0; transition: opacity .6s 1s; }
@@ -520,3 +507,9 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
   .editor__hl, .about__ring, .skill::after, .commit__graph b { display: none; }
 
 }
+
+/* 터미널 ls: 프로젝트 이름을 누르면 카드로 이동 */
+.term__ls button { color: var(--blue); font: inherit; font-weight: 500; padding: 0; cursor: pointer; text-underline-offset: 3px; }
+.term__ls button:hover { text-decoration: underline; color: var(--ink); }
+.pcard.is-flash { animation: pflash 1.8s var(--ease); border-radius: var(--r); }
+@keyframes pflash { 0%, 60% { box-shadow: 0 0 0 2px var(--blue), 0 0 40px -6px var(--blue); } 100% { box-shadow: 0 0 0 0 transparent; } }
