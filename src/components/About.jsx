@@ -17,13 +17,6 @@ export default function About() {
     [<H l={2}>About</H>],
     [<span className="md-b">{profile.lead}</span>],
     ...profile.body.map((l) => [<Li>{l}</Li>]),
-    [''],
-    [<H l={2}>Career <span className="c-com">({experience.ko})</span></H>],
-    ...companies.map((c) => [<Li><span className="md-b">{c.name}</span>  <span className="c-num">{c.period}</span> <span className="c-com">· {c.duration}</span></Li>]),
-    [''],
-    [<H l={2}>Contact</H>],
-    [<Li>email: <a className="c-str link" href={`mailto:${profile.email}`}>{profile.email}</a></Li>],
-    [<Li>github: <a className="c-str link" href={profile.github} target="_blank" rel="noreferrer">{profile.github.replace('https://', '')}</a></Li>],
   ]
   const code = [
     [<><S c="key">const</S> <S c="var">developer</S> <S c="op">=</S> {'{'}</>],
@@ -46,6 +39,24 @@ export default function About() {
           <div className="about__photo"><span className="about__ring" aria-hidden="true" /><img src={profile.photo} alt={`${profile.name} 프로필`} width="104" height="104" loading="lazy" /></div>
           <p className="about__name">{profile.name} <span>{profile.nameEn}</span></p>
           <p className="about__role"><span className="dot-live" /> {profile.role}</p>
+          <div className="about__sec">
+            <p className="about__h">Career <span>{experience.ko}</span></p>
+            <ul className="about__list">
+              {companies.map((c) => (
+                <li key={c.name}>
+                  <b>{c.name}{!c.end && <i className="about__now">재직 중</i>}</b>
+                  <span>{c.period} · {c.duration}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="about__sec">
+            <p className="about__h">Contact</p>
+            <ul className="about__list about__contact">
+              <li><span>email</span><a className="link" href={`mailto:${profile.email}`}>{profile.email}</a></li>
+              <li><span>github</span><a className="link" href={profile.github} target="_blank" rel="noreferrer">{profile.github.replace('https://', '')}</a></li>
+            </ul>
+          </div>
         </div>
         <div className="editor" data-reveal>
           <div className="editor__tabs" role="tablist" aria-label="파일">

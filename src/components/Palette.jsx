@@ -41,7 +41,7 @@ export default function Palette({ open, onClose, onProject }) {
               if (e.key === 'Enter' && shown[i]) run(shown[i])
             }}
           />
-          <kbd>esc</kbd>
+          <button type="button" className="palette__esc" onClick={onClose} aria-label="검색 닫기"><kbd>esc</kbd></button>
         </div>
         <ul className="palette__list">
           {shown.map((x, k) => (
