@@ -258,6 +258,13 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 .pcard__hit:hover { border-color: var(--line2); box-shadow: 0 30px 60px -30px #000, 0 0 0 1px #79c0ff22; }
 .pcard__bar { display: flex; align-items: center; gap: 12px; height: 32px; padding: 0 12px; border-bottom: 1px solid var(--line); font: 11.5px var(--mono); color: var(--ink3); }
 .pcard__bar .nav__dots i { width: 8px; height: 8px; }
+.codeshot { margin: 0; width: 100%; height: 100%; padding: 18px 16px; display: grid; align-content: center; gap: 2px; overflow: hidden;
+  font: 12.5px/1.75 var(--mono); color: var(--ink2); white-space: pre; background: radial-gradient(120% 90% at 0% 0%, #79c0ff14, transparent 60%), #0d1117; }
+.codeshot span { overflow: hidden; text-overflow: ellipsis; }
+.codeshot i { display: inline-block; width: 24px; margin-right: 12px; text-align: right; font-style: normal; color: var(--ink3); opacity: .6; }
+.codeshot span:first-child { color: var(--blue); }
+.codeshot--big { font-size: 14px; padding: 28px; border-radius: 8px; border: 1px solid var(--line); height: auto; max-width: 560px; }
+.viewer__shot.is-code { background: #0a0d12; }
 .pcard__shot { aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg2); border-bottom: 1px solid var(--line); }
 .pcard__shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1s var(--ease), filter .4s; filter: saturate(.85) brightness(.92); }
 .pcard__hit:hover .pcard__shot img { transform: scale(1.05); filter: none; }

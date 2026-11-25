@@ -17,6 +17,17 @@ const tilt = (e) => {
 }
 const untilt = (e) => { e.currentTarget.style.transform = '' }
 
+// 화면 이미지가 없는 프로젝트: 대표 코드를 에디터 화면처럼 보여줌
+function CodeShot({ p, big = false }) {
+  return (
+    <pre className={`codeshot ${big ? 'codeshot--big' : ''}`} aria-hidden="true">
+      {p.code.map((l, i) => (
+        <span key={i}><i>{i + 1}</i>{l}</span>
+      ))}
+    </pre>
+  )
+}
+
 const team = (people) => {
   const n = parseInt(people, 10)
   return n === 1 ? '1인' : `${n}인 팀`
@@ -71,8 +82,8 @@ function Viewer({ p, onClose, onMove }) {
             </ul>
           </aside>
           <div className="viewer__content" key={i} style={{ '--dir': dir }}>
-            <div className="viewer__shot">
-              {s.image.endsWith('.mp4')
+            <div className={`viewer__shot ${s.image ? '' : 'is-code'}`}>
+              {!s.image ? <CodeShot p={p} big /> : s.image.endsWith('.mp4')
                 ? <video key={s.image} src={s.image} autoPlay muted loop playsInline onLoadedData={(e) => e.currentTarget.play().catch(() => {})} aria-label={`${p.title} ${s.header}`} />
                 : <img key={s.image} src={s.image} alt={`${p.title} ${s.header}`} decoding="async" />}
             </div>
@@ -116,7 +127,7 @@ export default function Projects({ open, setOpen }) {
                 <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
                 <span>{p.slug}</span>
               </div>
-              <div className="pcard__shot"><img src={p.cover} alt="" loading="lazy" decoding="async" width="800" height="500" /></div>
+              <div className="pcard__shot">{p.cover ? <img src={p.cover} alt="" loading="lazy" decoding="async" width="800" height="500" /> : <CodeShot p={p} />}</div>
               <div className="pcard__body">
                 <p className="pcard__meta"><span>{p.date}</span><span>{team(p.people)}</span></p>
                 <h3 className="pcard__title">{p.title}</h3>
