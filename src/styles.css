@@ -675,3 +675,7 @@ html[data-os='win'] .term__bar::before { content: ''; width: 16px; height: 16px;
   background: #2671BE url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4.5l4 3.5-4 3.5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.5 11.5h4' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
 html[data-os='win'] .term__bar .nav__dots i::before { background: #fff; }
 html[data-os='win'] .term__bar .nav__dots i:hover { background: #ffffff1f; }
+
+/* 테마 전환 순간: 개별 transition 을 꺼서 깜빡임 방지 (화면 전체는 View Transition 으로 한 번에 교차 전환) */
+html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after { transition: none !important; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .28s; animation-timing-function: ease; }
