@@ -22,7 +22,7 @@ export const profile = {
   lead: '사용자가 실제로 겪는 불편에서 출발해 기능을 만듭니다.',
   body: [
     '신나는플랫폼에서 2년 10개월 동안 9개 대학의 NCS·포털·SSO 시스템을 운영하며 프론트엔드, 백엔드, 서버, DB를 함께 다뤘습니다.',
-    '개인 프로젝트로 AI 캐릭터 채팅, 로또 예측 서비스, 이미지 서버 등을 직접 설계하고 만들고 있습니다.',
+    '개인 프로젝트로 스타리그 육성 게임, 사주로 고르는 부적 앱, AI 캐릭터 채팅, 로또 예측 서비스 등을 직접 설계하고 만들고 있습니다.',
     '2025년 11월부터 메타노빅스에서 철도·제조 현장 데이터를 다루는 모니터링 시스템과 AI 학습 플랫폼을 만들고 있습니다.',
   ],
   stack: ['React', 'Svelte', 'TypeScript', 'Java · Spring'],
@@ -338,15 +338,6 @@ export const projects = [
       "Tailwind CSS",
       "IndexedDB"
     ],
-    "code": [
-      "const cube = {",
-      "  role: '여행 플래너',",
-      "  style: '친절하고 간결하게',",
-      "  rules: ['예산을 먼저 묻기'],",
-      "  output: 'markdown',",
-      "}",
-      "await run(cube, { provider: 'claude' })"
-    ],
     "highlights": [
       "백엔드 없이 브라우저에서만 동작하는 AI 에이전트 생성 도구",
       "역할·말투·규칙·지식·출력 형식으로 에이전트(큐브) 구성",
@@ -355,33 +346,61 @@ export const projects = [
     ],
     "slides": [
       {
-        "header": "주요 기능",
+        "header": "홈",
+        "image": "/opt/aicube1.webp",
         "groups": [
           {
-            "title": "",
+            "title": "내 큐브와 템플릿",
             "items": [
-              "백엔드 없이 100% 클라이언트에서 동작",
-              "역할·말투·규칙·지식·시작 프롬프트·출력 형식으로 큐브 구성",
-              "IndexedDB(Dexie)에 저장하고 불러오기",
+              "템플릿 하나로 바로 큐브를 만들고 목록에서 관리",
+              "백엔드 없이 100% 클라이언트에서 동작, IndexedDB(Dexie) 저장",
               "JSON 내보내기·가져오기, URL로 큐브 공유"
             ]
           }
         ]
       },
       {
-        "header": "AI 연동",
+        "header": "큐브 상세",
+        "image": "/opt/aicube2.webp",
         "groups": [
           {
-            "title": "다중 제공자",
+            "title": "큐브 구성",
             "items": [
-              "OpenAI·Anthropic·Google 모델을 한 클라이언트로 호출",
-              "Max Tokens, Temperature, Top P 등 생성 파라미터 조절",
-              "설정 화면에서 제공자·모델 선택"
+              "역할·말투·규칙·배경 지식·시작 메시지·출력 형식",
+              "실행·편집·JSON 내보내기·삭제"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "실행",
+        "image": "/opt/aicube3.webp",
+        "groups": [
+          {
+            "title": "대화하며 확인",
+            "items": [
+              "구성한 프롬프트를 옆에 띄워 두고 대화",
+              "OpenAI·Anthropic·Google·xAI 응답을 스트리밍으로 표시",
+              "Max Tokens, Temperature, Top P 등 생성 파라미터 조절"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "만들기",
+        "image": "/opt/aicube4.webp",
+        "groups": [
+          {
+            "title": "4단계 위저드",
+            "items": [
+              "기본 정보 → 역할과 말투 → 규칙·지식 → 출력 형식",
+              "단계마다 도움말, AI로 자동 채우기"
             ]
           }
         ]
       }
-    ]
+    ],
+    "cover": "/opt/aicube-card.webp"
   },
   {
     "slug": "lotto-analyzer",
@@ -486,13 +505,6 @@ export const projects = [
       "Docker",
       "JavaScript"
     ],
-    "code": [
-      "$ docker compose up -d",
-      "jmg  listening on :8080",
-      "POST /api/upload      201  sha256 중복 차단",
-      "GET  /photos/sunset   200  ETag",
-      "thumb  200 · 400 · 800px"
-    ],
     "highlights": [
       "업로드 즉시 고유 URL 생성, 클립보드 자동 복사",
       "SHA-256 해시로 중복 업로드 차단, 썸네일 자동 생성",
@@ -501,34 +513,63 @@ export const projects = [
     ],
     "slides": [
       {
-        "header": "주요 기능",
+        "header": "관리 화면",
+        "image": "/opt/jmg1.webp",
         "groups": [
           {
-            "title": "",
+            "title": "파일탐색기 스타일",
             "items": [
-              "업로드 즉시 URL 생성, 블로그·메신저에 바로 붙여넣기",
-              "클립보드 붙여넣기·드래그앤드롭 업로드",
-              "하위 폴더, 이름 변경, 벌크 이동·삭제",
-              "Slug URL(/photos/sunset 형태)"
+              "폴더와 이미지를 한 목록에서 탐색",
+              "드래그앤드롭·클립보드 붙여넣기·폴더째 업로드",
+              "업로드 즉시 고유 URL 생성, 클립보드 자동 복사"
             ]
           }
         ]
       },
       {
-        "header": "서버",
+        "header": "미리보기",
+        "image": "/opt/jmg2.webp",
         "groups": [
           {
-            "title": "Go 1.22 · SQLite",
+            "title": "이미지 정보",
             "items": [
-              "SHA-256 해시 중복 차단, 200/400/800px 썸네일 리사이즈",
-              "업로드·관리는 토큰 인증, 열람은 공개",
-              "ETag 캐싱으로 빠른 서빙",
-              "CGO 없는 단일 바이너리, docker compose 배포"
+              "원본 이름·타입·크기·해상도·폴더·URL 확인",
+              "URL 복사, 새 탭, 이름 변경, 삭제",
+              "Slug URL(/photos/sunset), ETag 캐싱"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "벌크 작업",
+        "image": "/opt/jmg3.webp",
+        "groups": [
+          {
+            "title": "여러 장 한 번에",
+            "items": [
+              "체크한 이미지를 한 번에 이동·삭제",
+              "SHA-256 해시로 같은 이미지 중복 업로드 차단",
+              "200·400·800px 썸네일 자동 생성"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "배포",
+        "image": "/opt/jmg4.webp",
+        "groups": [
+          {
+            "title": "Go 단일 바이너리",
+            "items": [
+              "SQLite 내장(CGO 불필요), docker compose 한 줄로 실행",
+              "업로드·관리는 토큰 인증, 이미지 열람은 공개",
+              "화면은 바닐라 HTML/CSS/JS 한 파일을 바이너리에 포함"
             ]
           }
         ]
       }
-    ]
+    ],
+    "cover": "/opt/jmg-card.webp"
   },
   {
     "slug": "jchat",
@@ -542,14 +583,6 @@ export const projects = [
       "Zustand",
       "Tailwind CSS"
     ],
-    "code": [
-      "interface AIProvider {",
-      "  chat(messages, opts): AsyncIterable<string>",
-      "}",
-      "const ai = pick(model)  // gemini | claude",
-      "const prompt = build(character, lorebook, memory)",
-      "for await (const t of ai.chat(prompt)) stream(t)"
-    ],
     "highlights": [
       "5단계 위저드로 캐릭터·시작 시나리오·로어북 생성",
       "Gemini / Claude 어댑터 패턴으로 모델 교체",
@@ -558,29 +591,223 @@ export const projects = [
     ],
     "slides": [
       {
-        "header": "주요 기능",
+        "header": "캐릭터 목록",
+        "image": "/opt/jchat1.webp",
         "groups": [
           {
             "title": "",
             "items": [
-              "캐릭터를 만들고 AI와 대화하는 플랫폼",
-              "기본 정보 → 상세 → 시작 시나리오 → 로어북 → 공개 설정 5단계 위저드",
-              "단계별 유효성 검사, 오류 단계로 자동 이동",
-              "기존 캐릭터 불러와 복사, 우측 미리보기 패널"
+              "공개된 캐릭터 카드와 왼쪽 채팅 기록",
+              "카드를 누르면 설명과 시작 시나리오를 고르고 이어하기·새로하기",
+              "내 캐릭터는 ⋮ 메뉴로 수정·삭제"
             ]
           }
         ]
       },
       {
-        "header": "구조",
+        "header": "채팅",
+        "image": "/opt/jchat2.webp",
         "groups": [
           {
-            "title": "Next.js 14 · Supabase",
+            "title": "스트리밍 대화",
             "items": [
-              "App Router, Zustand 상태 관리",
-              "Supabase PostgreSQL·Auth·Storage, RLS 정책",
-              "캐릭터 정보·로어북·메모리로 프롬프트 조립",
-              "Gemini·Claude 어댑터로 제공자 교체"
+              "첫 메시지를 보낼 때 채팅방 생성, 메시지는 DB에 저장",
+              "최신 20개 로드 후 위로 스크롤하면 이전 메시지 추가",
+              "메시지 수정·재생성·삭제, 시작 설정은 잠금"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "설정 패널",
+        "image": "/opt/jchat3.webp",
+        "groups": [
+          {
+            "title": "유저 노트·페르소나·메모리",
+            "items": [
+              "캐릭터별 유저 노트, 글로벌 페르소나 선택",
+              "대화가 쌓이면 자동 요약과 중요 사실 추출",
+              "프롬프트 = 타입 → 상세 → 시나리오 → 페르소나 → 노트 → 로어북 → 메모리"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "캐릭터 만들기",
+        "image": "/opt/jchat4.webp",
+        "groups": [
+          {
+            "title": "5단계 위저드",
+            "items": [
+              "기본 정보 → 상세 → 시작 시나리오 → 로어북 → 공개 설정",
+              "단계별 유효성 검사, 오류 단계로 자동 이동",
+              "오른쪽 미리보기, 기존 캐릭터 불러와 복사"
+            ]
+          }
+        ]
+      }
+    ],
+    "cover": "/opt/jchat-card.webp"
+  },
+  {
+    "slug": "nextsl",
+    "title": "NextSL — 스타리그 육성 시뮬레이션",
+    "date": "2026-09-29 ~ ing",
+    "people": "1명 - 기여도 100%(설계 및 개발)",
+    "stack": [
+      "TypeScript",
+      "React",
+      "Vite",
+      "Tauri 2",
+      "Rust"
+    ],
+    "cover": "/opt/nextsl-card.webp",
+    "highlights": [
+      "2007년 팬메이드 게임 '마이 스타크래프트'를 다시 만드는 비상업 리메이크",
+      "외부 의존성 없는 게임 로직(core)과 492개 테스트",
+      "3단계 경기 시뮬레이션과 픽셀 아트 관전 화면",
+      "Tauri로 묶은 오프라인 exe, 세이브 서명·팩 검증"
+    ],
+    "slides": [
+      {
+        "header": "시작 화면",
+        "image": "/opt/nextsl1.webp",
+        "groups": [
+          {
+            "title": "2012년, 그다음 시즌",
+            "items": [
+              "브루드 워 마지막 스타리그 이후를 감독으로 이어 가는 육성 게임",
+              "2012 기본 팩: 선수 103명·8개 팀·맵 20개·전략 45개",
+              "실제 11-12 프로리그 전 세트 기록으로 선수 등급 산정, 공식 순위표로 검증",
+              "엑셀(CSV) 데이터 팩을 합치고 zip으로 가져오기"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "주차 진행",
+        "image": "/opt/nextsl2.webp",
+        "groups": [
+          {
+            "title": "프로리그·MySL·시장",
+            "items": [
+              "주 2칸 일정에 경기·스크림·광고 제의가 도착, 수락·거절",
+              "시즌마다 맵 추첨, 승률로 맵 밸런스 패치",
+              "성장·노쇠·은퇴, 실제 FA 제도(우선 협상→입찰→선수 선택)",
+              "팬·스폰서·방송 수입으로 돌아가는 구단 경제"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "VS 엔트리",
+        "image": "/opt/nextsl3.webp",
+        "groups": [
+          {
+            "title": "세트별 출전 선수 고르기",
+            "items": [
+              "맵 속성·종족 상성·컨디션을 보고 세트마다 선수 배치",
+              "상대 엔트리 예측과 12축 능력치 레이더",
+              "유명 선수는 전략이 노출되는 정보전, 신인은 정보 없음",
+              "소모품(컨디션 부스터 등)과 에이스 결정전"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "경기 화면",
+        "image": "/opt/nextsl4.webp",
+        "groups": [
+          {
+            "title": "빌드 → 교전 → 운영",
+            "items": [
+              "시드 고정 3단계 시뮬레이션: 스킵하거나 다시 불러와도 결과 동일",
+              "직접 그린 도트 스프라이트로 건물·유닛·병력 흐름 표시",
+              "색으로 구분한 중계 문구, 배속·세트 넘기기",
+              "세이브 서명·메모리 값 위장·팩 경로 검증으로 가벼운 조작 차단"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "haengun-dream",
+    "title": "행운드림 — 오늘의 행운 부적",
+    "date": "2026-11-03 ~ ing",
+    "people": "1명 - 기여도 100%(설계 및 개발)",
+    "stack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "PWA",
+      "Upstash Redis",
+      "Vercel"
+    ],
+    "cover": "/opt/haengun-card.webp",
+    "highlights": [
+      "이름·생년월일로 사주와 띠를 계산해 하루 고정 부적을 고르는 모바일 웹 앱",
+      "끈을 당겨 두루마리를 푸는 인터랙션",
+      "계산은 기기 안에서만, 개인정보를 서버로 보내지 않음",
+      "홈 화면 추가·오프라인 실행(PWA)"
+    ],
+    "slides": [
+      {
+        "header": "부적 쓰기",
+        "image": "/opt/haengun1.webp",
+        "groups": [
+          {
+            "title": "이름 → 생년월일 → 풍습 → 중요한 날",
+            "items": [
+              "입력한 이름이 부적에 붓글씨로 써지고, 띠와 일간이 도장으로 찍힘",
+              "생년월일로 년주·월주·일주와 오행 분포 계산",
+              "한국·아시아·세계 풍습 중 고른 상징에서만 아이템 선택",
+              "정보는 기기에만 저장"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "두루마리",
+        "image": "/opt/haengun2.webp",
+        "groups": [
+          {
+            "title": "끈을 당겨 매듭 풀기",
+            "items": [
+              "하루 한 번 끈으로 묶인 두루마리로 도착",
+              "끈 끝을 당기면 실제 매듭처럼 고리가 빠지며 풀림",
+              "끈은 처음부터 끝까지 한 가닥으로 그림",
+              "진동 지원 기기에서 짧은 진동, '동작 줄이기' 설정 존중"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "오늘의 부적",
+        "image": "/opt/haengun3.webp",
+        "groups": [
+          {
+            "title": "사주·띠·일진으로 고른 아이템",
+            "items": [
+              "부족한 오행·삼합 띠·그날 일진에 가중치를 둔 결정 엔진",
+              "같은 날에는 몇 번을 열어도 같은 부적",
+              "행운의 빛·수·방향, 분야별로 실제 도움이 되는 팁",
+              "'꾹 눌러 응원 받기': 자모 편집 거리로 비슷한 상황 찾기"
+            ]
+          }
+        ]
+      },
+      {
+        "header": "고운 말 뽑기통",
+        "image": "/opt/haengun4.webp",
+        "groups": [
+          {
+            "title": "서로 고운 말 주고받기",
+            "items": [
+              "통을 흔들어 랜덤으로 한 장 뽑고, 좋아요가 많은 말 모아 보기",
+              "띄어쓰기·기호로 피한 욕설과 자모 욕까지 거르는 필터",
+              "기기당 하루 5장, 신고 3건이면 제외",
+              "Upstash Redis 저장, 기기 아이디는 해시만 보관"
             ]
           }
         ]
@@ -588,6 +815,8 @@ export const projects = [
     ]
   }
 ]
+
+
 
 export const stats = [
   { value: experience.short, label: '실무 경력' },
