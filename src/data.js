@@ -23,9 +23,9 @@ export const profile = {
   body: [
     '신나는플랫폼에서 2년 10개월 동안 9개 대학의 NCS·포털·SSO 시스템을 운영하며 프론트엔드, 백엔드, 서버, DB를 함께 다뤘습니다.',
     'React·TypeScript로 출석 관리, 실시간 채팅, AI 발달 리포트 같은 서비스를 직접 설계하고 만들었습니다.',
-    '2025년 11월부터 메타노빅스에서 일하고 있습니다.',
+    '2025년 11월부터 메타노빅스에서 철도·제조 현장 데이터를 다루는 모니터링 시스템과 AI 학습 플랫폼을 만들고 있습니다.',
   ],
-  stack: ['React', 'TypeScript', 'Java · Spring'],
+  stack: ['React', 'Svelte', 'TypeScript', 'Java · Spring'],
 }
 
 export const nav = [
@@ -37,10 +37,10 @@ export const nav = [
 
 /** icon: react-icons 이름 (components/icons.js 에 등록) */
 export const skills = [
-  { group: 'frontend', items: [['React', 'FaReact', '#61DAFB'], ['Angular', 'FaAngular', '#DD0031'], ['jQuery', 'SiJquery', '#0769AD']] },
+  { group: 'frontend', items: [['React', 'FaReact', '#61DAFB'], ['Svelte', 'SiSvelte', '#FF3E00'], ['Angular', 'FaAngular', '#DD0031'], ['jQuery', 'SiJquery', '#0769AD']] },
   { group: 'basic', items: [['HTML5', 'FaHtml5', '#E34F26'], ['CSS3', 'FaCss3Alt', '#1572B6'], ['JavaScript', 'FaJs', '#F7DF1E'], ['TypeScript', 'BiLogoTypescript', '#3178C6']] },
-  { group: 'backend', items: [['Java', 'FaJava', '#ED8B00'], ['Spring Boot', 'SiSpringboot', '#6DB33F'], ['Node.js', 'FaNodeJs', '#68A063'], ['Python', 'SiPython', '#3776AB'], ['Django', 'SiDjango', '#44B78B']] },
-  { group: 'database', items: [['Oracle', 'GrOracle', '#F80000'], ['MariaDB', 'SiMariadb', '#C0765A'], ['MSSQL', 'DiMsqlServer', '#CC2927']] },
+  { group: 'backend', items: [['Java', 'FaJava', '#ED8B00'], ['Spring Boot', 'SiSpringboot', '#6DB33F'], ['Node.js', 'FaNodeJs', '#68A063'], ['Python', 'SiPython', '#3776AB'], ['FastAPI', 'SiFastapi', '#009688'], ['Django', 'SiDjango', '#44B78B']] },
+  { group: 'database', items: [['PostgreSQL', 'SiPostgresql', '#4169E1'], ['Oracle', 'GrOracle', '#F80000'], ['MariaDB', 'SiMariadb', '#C0765A'], ['MSSQL', 'DiMsqlServer', '#CC2927'], ['DuckDB', 'SiDuckdb', '#FFF000']] },
   { group: 'vcs', items: [['Git', 'FaGitAlt', '#F05032'], ['GitHub', 'FaGithub', '#E6EDF3'], ['GitLab', 'FaGitlab', '#FC6D26']] },
   { group: 'cloud', items: [['AWS', 'FaAws', '#FF9900'], ['Firebase', 'SiFirebase', '#FFCA28']] },
   { group: 'tools', items: [['Figma', 'FaFigma', '#F24E1E'], ['Notion', 'SiNotion', '#E6EDF3']] },
@@ -53,8 +53,43 @@ export const companies = [
     name: '메타노빅스',
     start: '2025.11',
     end: null,
-    // 담당 업무를 적으면 커밋처럼 표시됩니다 (main/front/back/server/database)
-    commits: [],
+    // 사내 프로젝트라 화면·이미지 없이 맡은 작업만 적습니다
+    commits: [
+      {
+        year: '2025.11 — 2026.10',
+        tag: 'hyperx',
+        title: '제조 품질 검사 데이터 분석 시스템',
+        main: ['수입·출하 검사 종합현황, Trend, 공급사·검사항목 비교 화면 개발', '히스토그램·CPK·규격 한계(USL/LSL) 기반 통계 분석', '검사 가이드 PDF 뷰어'],
+        front: ['SvelteKit·ECharts 차트: 줌 구간 재조회, 전체화면, 이미지 저장', 'Tabulator 그리드 필터·정렬, 진행률 표시와 CSV 다운로드'],
+        back: ['Spring·MyBatis 통계 쿼리 성능 개선, 0 나누기·데이터 없음 예외 처리', '엑셀 다운로드를 offset에서 cursor 방식으로 전환'],
+        server: ['LTTB 샘플링으로 모니터링 데이터량 축소', 'SSE 타임아웃 조정, 연결·차트 리소스 정리'],
+      },
+      {
+        year: '2026.04 — 2026.09',
+        tag: 'ai-ops',
+        title: '철도 차량 시계열 데이터 AI 학습·운영 플랫폼',
+        main: ['노선 → 편성 → 호차 → 장치 → 센서 자산 계층 기반 데이터 수집·전처리·학습 흐름 구현', 'MoE 전문가 모델 라우팅 채팅, LLM 모델 추가'],
+        front: ['Svelte 5로 데이터 업로드·미리보기, 로그인·초기 설정 화면 개발'],
+        back: ['FastAPI로 자산·데이터셋·학습·스케줄 API 개발', '로컬 ML 모델 학습·추론, 주기 학습 스케줄러'],
+      },
+      {
+        year: '2026.06 — 2026.11',
+        tag: 'scm',
+        title: '철도 차량 상태 모니터링 시스템',
+        main: ['운전실·편성 운행상태 실시간 모니터링 화면', '고장검지·고장이력·편성고장통계·고장통계분석·운행통계 화면', '실시간 고장 알림'],
+        front: ['SSE 편성별 동적 구독, 실시간 OFF 시 마지막 데이터 유지', '차트 dispose·리사이즈 리스너 정리로 중복 렌더와 메모리 누수 방지'],
+        back: ['TCMS 데이터 다운로드, 실시간 이벤트 로그 연동', '로그인 속도 개선, 조회 로직·인덱스 개선'],
+        server: ['GitHub Actions 배포 구성, 백엔드·프론트 분리 배포와 압축 전송'],
+      },
+      {
+        year: '2026.07 — 2026.08',
+        tag: 'cbm',
+        title: '상태기반정비(CBM) 데이터 화면',
+        main: ['CBM 데이터 수집현황, 고장발생통계, 이벤트발생이력 화면 개발'],
+        back: ['대용량 CSV 스트리밍 다운로드와 병렬 처리로 다운로드 성능 개선', 'CSV·Parquet 다운로드 분리'],
+        database: ['DuckDB로 대용량 데이터 추출'],
+      },
+    ],
   },
   {
     name: '신나는플랫폼',
@@ -62,14 +97,31 @@ export const companies = [
     end: '2024.07',
     commits: [
       {
-        year: '2021.10 — 2024.07',
-        tag: 'v1.0 → v3.0',
-        title: '9개 대학 NCS · 포털 · SSO 시스템 운영 및 개발',
-        main: ['9개 대학 NCS 시스템 오류 수정 및 기능 개발', '신안산대 NCS 개발 PL 수행', 'OZ report 유지보수'],
-        front: ['JS·jQuery로 NCS 시스템과 동국대 SSO 화면 개발', 'Angular 중앙대 포털, WebSquare 신성대 종합정보시스템', 'Nexacro 유한대 학생이력시스템'],
-        back: ['Java·Spring으로 NCS·포털·SSO 유지보수 및 개발'],
-        server: ['7개 대학 Linux 서버 운영', '동국대 포털·SSO 서버 복구, 사내 서버 AWS 이관'],
+        year: '2021.10 — 2022.09',
+        tag: 'v1.0',
+        title: '대학 NCS 유지보수 · 동국대 SSO · 유한대 학생이력시스템',
+        main: ['9개 대학 NCS 시스템 오류 수정 및 개발', 'OZ report 유지보수'],
+        front: ['jQuery로 동국대 SSO 로그인 화면 개발', 'Nexacro로 유한대 학생이력시스템 개발'],
+        back: ['Java로 NCS·SSO·학생이력시스템 개발'],
+        server: ['7개 대학 Linux 서버 운영, 사내 서버 관리'],
         database: ['Oracle(7개 대학)·MySQL(2개 대학) NCS DB 관리'],
+      },
+      {
+        year: '2022.10 — 2023.09',
+        tag: 'v2.0',
+        title: '신안산대 NCS PL · 중앙대 포털 · 서버 복구',
+        main: ['신안산대 NCS 개발 PL 수행'],
+        front: ['Angular로 중앙대 포털 관리', '동국대 포털·미래융합교육원 SSO 유지보수'],
+        back: ['Java로 중앙대 포털·SSO 유지보수 및 개발'],
+        server: ['동국대 포털·SSO·미래융합교육원 서버 복구'],
+      },
+      {
+        year: '2023.10 — 2024.07',
+        tag: 'v3.0',
+        title: '신성대 종합정보시스템 · AWS 이관',
+        front: ['WebSquare로 신성대 종합정보시스템 유지보수 및 개발'],
+        back: ['Spring으로 신성대 종합정보시스템 개발'],
+        server: ['사옥 이전에 따른 사내 시스템 AWS 이관'],
       },
     ],
   },
