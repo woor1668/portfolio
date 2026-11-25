@@ -680,17 +680,17 @@ html[data-os='win'] .term__bar .nav__dots i:hover { background: #ffffff1f; }
 html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after { transition: none !important; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .28s; animation-timing-function: ease; }
 
-/* 마우스 포인터 — 다크(터미널풍) / 라이트(Windows풍). 마우스를 쓰는 PC에서만.
+/* 마우스 포인터 — 다크 = macOS 기본 커서풍 / 라이트 = Windows 11 기본 커서풍 (OS 기본 크기). 마우스를 쓰는 PC에서만.
    ※ image-set() 은 크롬 커서에서 지원되지 않으므로 url() 만 사용
-   ※ html :is(...) 로 감싸 기존 개별 cursor: pointer 규칙보다 우선 */
+   ※ html :is(...) 로 감싸 기존 개별 cursor 규칙보다 우선 */
 @media (pointer: fine) {
-  html, html body { cursor: url('/cursors/dark-arrow.png') 2 1, auto; }
-  html :is(a, button, [role='button'], [role='tab'], [role='radio'], summary, label, select, .career__head, .palette__esc, .term__ls button) { cursor: url('/cursors/dark-pointer.png') 2 1, pointer; }
-  html :is(button, .career__head):disabled { cursor: url('/cursors/dark-arrow.png') 2 1, default; }
-  html :is(input, textarea, [contenteditable]) { cursor: url('/cursors/dark-text.png') 16 16, text; }
+  html, html body { cursor: url('/cursors/mac-arrow.png') 2 2, auto; }
+  html :is(a, button, [role='button'], [role='tab'], [role='radio'], summary, label, select, .career__head, .palette__esc, .term__ls button) { cursor: url('/cursors/mac-hand.png') 10 1, pointer; }
+  html :is(button, .career__head):disabled { cursor: url('/cursors/mac-no.png') 2 2, not-allowed; }
+  html :is(input, textarea, [contenteditable]) { cursor: url('/cursors/mac-text.png') 8 12, text; }
 
-  html[data-os='win'], html[data-os='win'] body { cursor: url('/cursors/light-arrow.png') 2 1, auto; }
-  html[data-os='win'] :is(a, button, [role='button'], [role='tab'], [role='radio'], summary, label, select, .career__head, .palette__esc, .term__ls button) { cursor: url('/cursors/light-pointer.png') 2 1, pointer; }
-  html[data-os='win'] :is(button, .career__head):disabled { cursor: url('/cursors/light-arrow.png') 2 1, default; }
-  html[data-os='win'] :is(input, textarea, [contenteditable]) { cursor: url('/cursors/light-text.png') 16 16, text; }
+  html[data-os='win'], html[data-os='win'] body { cursor: url('/cursors/win-arrow.png') 1 1, auto; }
+  html[data-os='win'] :is(a, button, [role='button'], [role='tab'], [role='radio'], summary, label, select, .career__head, .palette__esc, .term__ls button) { cursor: url('/cursors/win-hand.png') 10 1, pointer; }
+  html[data-os='win'] :is(button, .career__head):disabled { cursor: url('/cursors/win-no.png') 1 1, not-allowed; }
+  html[data-os='win'] :is(input, textarea, [contenteditable]) { cursor: url('/cursors/win-text.png') 8 12, text; }
 }
