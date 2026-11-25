@@ -1,17 +1,20 @@
 import { useState } from 'react'
 import { nav, profile } from '../data'
+import { homePath, shortcut, useOS } from '../os'
+import OSSwitch from './OSSwitch'
 
 const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
 export default function Nav({ active, onPalette }) {
   const [open, setOpen] = useState(false)
+  const { os } = useOS()
   return (
     <header className="nav">
       <div className="nav__bar">
         <button className="nav__brand" onClick={() => go('top')} aria-label="맨 위로">
           <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
           <b>JB WORKS</b>
-          <span className="nav__path">~/{profile.handle}/portfolio</span>
+          <span className="nav__path">{homePath(os, profile.handle)}</span>
         </button>
         <nav className={`nav__tabs ${open ? 'is-open' : ''}`} aria-label="섹션">
           {nav.map((n) => (
@@ -26,8 +29,9 @@ export default function Nav({ active, onPalette }) {
             </a>
           ))}
         </nav>
+        <OSSwitch />
         <button className="nav__cmd" onClick={onPalette} aria-label="명령 팔레트 열기">
-          <span>검색</span><kbd>⌘K</kbd>
+          <span>검색</span><kbd>{shortcut(os)}</kbd>
         </button>
         <button className="nav__burger" onClick={() => setOpen((v) => !v)} aria-label="메뉴" aria-expanded={open}>
           <i /><i />

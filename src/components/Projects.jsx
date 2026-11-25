@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { projects } from '../data'
 import { useModal } from '../hooks'
 import SectionHead from './SectionHead'
+import { sep, useOS } from '../os'
 
 // 마우스 위치에 따라 카드가 살짝 기울고 빛이 따라다님 (호버한 카드만)
 const tilt = (e) => {
@@ -39,6 +40,8 @@ function Viewer({ p, onClose, onMove }) {
   const dir = i >= prev.current ? 1 : -1 // 넘기는 방향에 맞춰 화면이 들어옴
   useEffect(() => { prev.current = i }, [i])
   const s = p.slides[i]
+  const { os } = useOS()
+  const d = sep(os)
   let n = 0 // 항목 순서대로 등장
   const close = useCallback(() => onClose(), [onClose])
   useModal(true, close)
@@ -58,7 +61,7 @@ function Viewer({ p, onClose, onMove }) {
         <div className="viewer__bar">
           <span className="viewer__progress" style={{ transform: `scaleX(${(i + 1) / p.slides.length})` }} aria-hidden="true" />
           <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
-          <span className="viewer__path">projects/{p.slug}/<b>{s.header}</b></span>
+          <span className="viewer__path">projects{d}{p.slug}{d}<b>{s.header}</b></span>
           <div className="viewer__nav">
             <button onClick={() => onMove(-1)} aria-label="이전 프로젝트">←</button>
             <button onClick={() => onMove(1)} aria-label="다음 프로젝트">→</button>

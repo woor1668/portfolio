@@ -541,3 +541,138 @@ html[data-sec='about'] { --tone: var(--blue); } html[data-sec='skills'] { --tone
 .palette__esc kbd { transition: color .2s, border-color .2s, background .2s; }
 .palette__esc:hover kbd { color: var(--ink); border-color: var(--line2); background: var(--panel2); }
 .palette__esc:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* =========================================================
+   화면 스타일 스위치 (macOS / Windows)
+   ========================================================= */
+.os-switch { display: inline-flex; padding: 3px; gap: 2px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg2); }
+.os-switch button { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 6px; font: 500 12px var(--mono); color: var(--ink3); transition: color .2s, background .2s; }
+.os-switch button svg { width: 13px; height: 13px; }
+.os-switch button:hover { color: var(--ink2); }
+.os-switch button.is-on { background: var(--panel2); color: var(--ink); box-shadow: 0 1px 0 #0003; }
+@media (max-width: 1100px) { .os-switch button span { display: none; } .os-switch button { padding: 0 9px; } }
+
+/* =========================================================
+   Windows 11 (화이트) 스타일
+   ========================================================= */
+html[data-os='win'] {
+  --bg: #F3F3F3;
+  --bg2: #FAFAFA;
+  --panel: #FFFFFF;
+  --panel2: #F0F0F0;
+  --line: #E3E3E3;
+  --line2: #CFCFCF;
+  --ink: #1B1B1B;
+  --ink2: #505050;
+  --ink3: #8A8A8A;
+  --green: #1A7F37;
+  --blue: #0067C0;
+  --purple: #8250DF;
+  --orange: #BC4C00;
+  --yellow: #9A6700;
+  --red: #CF222E;
+  --cyan: #0E7490;
+  --mono: 'Cascadia Code', 'Cascadia Mono', Consolas, 'JetBrains Mono', ui-monospace, monospace;
+  --sans: 'Segoe UI Variable Text', 'Segoe UI Variable', 'Segoe UI', 'Pretendard Variable', Pretendard, system-ui, sans-serif;
+  --r: 8px;
+  --code-bg: #FFFFFF;
+  --shadow: 0 2px 4px #0000000a, 0 8px 24px -8px #00000024;
+  color-scheme: light;
+  scrollbar-color: #B5B5B5 #F3F3F3;
+}
+html[data-os='win'] body { letter-spacing: 0; }
+html[data-os='win'] ::selection { background: #0067c033; }
+html[data-os='win'] ::-webkit-scrollbar-track { background: #F3F3F3; }
+html[data-os='win'] ::-webkit-scrollbar-thumb { background: #B5B5B5; border-color: #F3F3F3; }
+html[data-os='win'] .c-str { color: #0A3069; }
+html[data-os='win'] .link { text-decoration-color: #0067c055; }
+html[data-os='win'] .bg-grid { opacity: .55; }
+html[data-os='win'] .rain { opacity: .28; }
+
+/* 창 버튼: 왼쪽 신호등 → 오른쪽 ─ ☐ ✕ */
+html[data-os='win'] .nav__dots { order: 99; margin-left: auto; gap: 0; align-self: stretch; }
+html[data-os='win'] .nav__dots i { width: 40px; height: auto; min-height: 100%; border-radius: 0; background: none; display: grid; place-items: center; transition: background .15s; }
+html[data-os='win'] .nav__dots i::before { content: ''; width: 10px; height: 10px; background: var(--ink2);
+  -webkit-mask: var(--glyph) center / contain no-repeat; mask: var(--glyph) center / contain no-repeat; }
+html[data-os='win'] .nav__dots i:nth-child(1) { --glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M0 5h10' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E"); }
+html[data-os='win'] .nav__dots i:nth-child(2) { --glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='.5' y='.5' width='9' height='9' rx='1.5' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E"); }
+html[data-os='win'] .nav__dots i:nth-child(3) { --glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M.5.5l9 9M9.5.5l-9 9' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E"); }
+html[data-os='win'] .pcard__hit:hover .nav__dots i:nth-child(3), html[data-os='win'] .term:hover .nav__dots i:nth-child(3) { background: #C42B1C; }
+html[data-os='win'] .pcard__hit:hover .nav__dots i:nth-child(3)::before, html[data-os='win'] .term:hover .nav__dots i:nth-child(3)::before { background: #fff; }
+/* 상단 메뉴바의 점은 숨기고 Windows 로고 */
+html[data-os='win'] .nav__brand .nav__dots { display: none; }
+html[data-os='win'] .nav__brand::before { content: ''; width: 16px; height: 16px; flex: none;
+  background: linear-gradient(#0067C0, #0067C0) 0 0 / 7px 7px no-repeat, linear-gradient(#0067C0, #0067C0) 9px 0 / 7px 7px no-repeat,
+              linear-gradient(#0067C0, #0067C0) 0 9px / 7px 7px no-repeat, linear-gradient(#0067C0, #0067C0) 9px 9px / 7px 7px no-repeat; }
+/* 제목줄이 왼쪽부터 시작하도록 */
+html[data-os='win'] .term__bar, html[data-os='win'] .pcard__bar, html[data-os='win'] .viewer__bar { padding-right: 0; }
+
+/* 상단 메뉴바: 흰 Mica 느낌 */
+html[data-os='win'] .nav__bar { background: #ffffffd9; backdrop-filter: blur(20px) saturate(1.4); border-color: var(--line); border-radius: 8px; box-shadow: var(--shadow); }
+html[data-os='win'] .nav__tabs a { font-family: var(--sans); font-size: 13.5px; }
+html[data-os='win'] .nav__tabs a:hover { background: #0000000a; }
+html[data-os='win'] .nav__tabs a.is-on { background: #0000000d; }
+html[data-os='win'] .nav__tabs a.is-on::after { left: 50%; right: auto; width: 16px; translate: -50% 0; height: 3px; background: var(--blue); }
+html[data-os='win'] .nav__cmd { background: #fff; border-radius: 6px; border-bottom-color: #0000004d; }
+html[data-os='win'] .nav__burger i { background: var(--ink); }
+html[data-os='win'] kbd { background: #fff; border-color: var(--line2); border-bottom-width: 2px; color: var(--ink2); }
+html[data-os='win'] .os-switch { background: #0000000a; border-color: transparent; }
+html[data-os='win'] .os-switch button.is-on { background: #fff; box-shadow: 0 1px 3px #00000026; }
+
+/* 버튼: Fluent 스타일 */
+html[data-os='win'] .btn { border-radius: 6px; background: #fff; border-color: var(--line); border-bottom-color: #00000033; font-family: var(--sans); font-weight: 600; box-shadow: 0 1px 2px #0000000d; }
+html[data-os='win'] .btn:hover { background: #F9F9F9; border-color: var(--line2); }
+html[data-os='win'] .btn--primary { background: #0067C0; border-color: #0067C0; border-bottom-color: #003E73; color: #fff; }
+html[data-os='win'] .btn--primary .c-op { color: #ffffffaa; }
+html[data-os='win'] .btn--primary:hover { background: #1975C5; border-color: #1975C5; }
+html[data-os='win'] .btn--ghost { background: none; box-shadow: none; border-color: transparent; }
+
+/* 히어로 */
+html[data-os='win'] .hero__aura { background: radial-gradient(900px circle at 10% 0%, #0067c014, transparent 60%), radial-gradient(700px circle at 85% 30%, #8250df10, transparent 60%); }
+html[data-os='win'] .hero__glow { background: radial-gradient(closest-side, #0067c014, transparent); }
+html[data-os='win'] .hero__big em { color: var(--blue); }
+
+/* 터미널 → Windows Terminal (밝은 테마) */
+html[data-os='win'] .term { background: #FFFFFF; border-color: var(--line); border-radius: 8px; box-shadow: 0 32px 64px -24px #00000040, 0 2px 6px #0000000f; }
+html[data-os='win'] .term__bar { background: #EEF0F3; border-bottom: 1px solid var(--line); font-family: var(--sans); color: var(--ink); }
+html[data-os='win'] .term__body { color: #1F2328; }
+html[data-os='win'] .term__body .c-dir { color: #0E7490; }
+
+/* 카드·창 공통 */
+html[data-os='win'] .editor, html[data-os='win'] .codeshot, html[data-os='win'] .viewer__shot.is-code { background: #FFFFFF; }
+html[data-os='win'] .editor__tabs button.is-on { background: #FFFFFF; }
+html[data-os='win'] .editor__tabs button:hover, html[data-os='win'] .editor__line:hover { background: #0000000a; }
+html[data-os='win'] .codeshot { background: radial-gradient(120% 90% at 0% 0%, #0067c00f, transparent 60%), #fff; }
+html[data-os='win'] .skill, html[data-os='win'] .pcard__hit, html[data-os='win'] .editor, html[data-os='win'] .term, html[data-os='win'] .about__card { box-shadow: var(--shadow); }
+html[data-os='win'] .pcard__hit:hover { box-shadow: 0 24px 48px -24px #00000040, 0 0 0 1px #0067c033; }
+html[data-os='win'] .pcard__spot { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), #0067c014, transparent 45%); }
+html[data-os='win'] .pcard__bar, html[data-os='win'] .viewer__bar { background: #F3F3F3; font-family: var(--sans); }
+html[data-os='win'] .pcard__stack span, html[data-os='win'] .viewer__stack span { color: #0067C0; background: #0067c00f; border-color: #0067c033; }
+html[data-os='win'] .commit__tag { border-color: #1a7f3766; }
+html[data-os='win'] .about__photo { box-shadow: 0 0 0 5px #0067c014; }
+
+/* 프로젝트 뷰어 · 검색 팔레트 */
+html[data-os='win'] .viewer { background: #0000004d; backdrop-filter: blur(4px); }
+html[data-os='win'] .viewer__win { border-radius: 8px; border-color: var(--line2); box-shadow: 0 32px 80px -20px #00000059; }
+html[data-os='win'] .viewer__shot { background: #F6F6F6; }
+html[data-os='win'] .viewer__shot img, html[data-os='win'] .viewer__shot video { box-shadow: 0 8px 24px -8px #00000040; }
+html[data-os='win'] .viewer__files button.is-on { background: #0067c014; }
+html[data-os='win'] .palette { background: #0000003d; backdrop-filter: blur(3px); }
+html[data-os='win'] .palette__box { border-radius: 8px; box-shadow: 0 32px 80px -20px #00000059; }
+html[data-os='win'] .palette__list button.is-on { background: #0067c014; }
+
+/* 아래 상태바 → 밝은 작업표시줄 느낌 */
+html[data-os='win'] .status { background: #FFFFFFE6; backdrop-filter: blur(16px); color: var(--ink2); }
+html[data-os='win'] .editor__hl { background: linear-gradient(90deg, #0067c014, #0067c005 60%, transparent); }
+html[data-os='win'] .viewer__shot::after { background: linear-gradient(transparent, #0067c00f, transparent); }
+/* 뷰어는 실제 ←·→·✕ 버튼이 있으므로 장식 버튼은 숨기고, 닫기 버튼을 Windows처럼 */
+html[data-os='win'] .viewer__bar .nav__dots { display: none; }
+html[data-os='win'] .viewer__nav button { border-radius: 0; height: 100%; min-width: 44px; }
+html[data-os='win'] .viewer__nav button:hover { background: #0000000d; }
+html[data-os='win'] .viewer__nav button:last-child:hover { background: #C42B1C; color: #fff; }
+/* PowerShell 창: 제목줄은 PowerShell 고유의 파란색 */
+html[data-os='win'] .term__bar { background: #012456; border-bottom-color: #012456; color: #fff; }
+html[data-os='win'] .term__bar::before { content: ''; width: 16px; height: 16px; flex: none; border-radius: 3px;
+  background: #2671BE url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 4.5l4 3.5-4 3.5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.5 11.5h4' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% no-repeat; }
+html[data-os='win'] .term__bar .nav__dots i::before { background: #fff; }
+html[data-os='win'] .term__bar .nav__dots i:hover { background: #ffffff1f; }

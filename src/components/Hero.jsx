@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { profile, projects, stats } from '../data'
 import { useCountUp, useTyping } from '../hooks'
+import { shortcut, useOS } from '../os'
 
 function Stat({ value, label, run }) {
   const v = useCountUp(value, run)
@@ -39,6 +40,11 @@ const goProject = (slug) => {
 
 export default function Hero({ onPalette }) {
   const [out, done] = useTyping(LINES)
+  const { os } = useOS()
+  // 프롬프트: macOS zsh ↔ Windows PowerShell
+  const prompt = os === 'win'
+    ? <span className="c-dir">PS C:\Users\{profile.handle}&gt;</span>
+    : <><span className="c-ok">➜</span> <span className="c-dir">~</span></>
   const glow = useRef(null)
 
   // 커서를 따라다니는 은은한 빛 — transform 만 바꿔 GPU 에서 처리 (리페인트 없음)
@@ -76,25 +82,25 @@ export default function Hero({ onPalette }) {
               <span className="c-op">$</span> view projects
             </a>
             <a className="btn" href={profile.github} target="_blank" rel="noreferrer">github ↗</a>
-            <button className="btn btn--ghost" onClick={onPalette}><kbd>⌘K</kbd> 바로가기</button>
+            <button className="btn btn--ghost" onClick={onPalette}><kbd>{shortcut(os)}</kbd> 바로가기</button>
           </div>
         </div>
 
         <div className="term" role="img" aria-label={`터미널: ${profile.name}, ${profile.tagline}`}>
           <div className="term__bar">
             <span className="nav__dots" aria-hidden="true"><i /><i /><i /></span>
-            <span>zsh — {profile.handle}@portfolio</span>
+            <span>{os === 'win' ? 'Windows PowerShell' : `zsh — ${profile.handle}@portfolio`}</span>
           </div>
           <div className="term__body" aria-hidden="true">
             {LINES.map((l, i) => {
               if (i >= out.length) return null
               const text = out[i]
               const typing = i === out.length - 1 && !done && l.type === 'cmd'
-              if (l.type === 'cmd') return <p key={i}><span className="c-ok">➜</span> <span className="c-dir">~</span> {text}{typing && <span className="caret" />}</p>
+              if (l.type === 'cmd') return <p key={i}>{prompt} {text}{typing && <span className="caret" />}</p>
               if (l.type === 'ls') return <p key={i} className="term__ls">{text.split('  ').map((t) => projects.some((p) => p.slug === t) ? <button key={t} type="button" tabIndex={-1} onClick={() => goProject(t)}>{t}/</button> : <span key={t}>{t}/</span>)}</p>
               return <p key={i} className="term__out">{text}</p>
             })}
-            {done && <p><span className="c-ok">➜</span> <span className="c-dir">~</span> <span className="caret" /></p>}
+            {done && <p>{prompt} <span className="caret" /></p>}
           </div>
         </div>
       </div>

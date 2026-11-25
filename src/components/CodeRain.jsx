@@ -30,10 +30,12 @@ const SNIPPETS = [
 const KEYWORDS = /\b(const|let|return|export|default|function|await|async|new|if|throw|public|SELECT|FROM|WHERE|UPDATE|SET|import)\b/g
 
 /** 배경 코드 비 — 캔버스 1장, 초당 30프레임, 화면이 숨겨지면 멈춤 */
-export default function CodeRain({ color = '#7EE787' }) {
+export default function CodeRain({ color = '#7EE787', dim = '#8B98A9' }) {
   const ref = useRef(null)
   const colorRef = useRef(color)
   useEffect(() => { colorRef.current = color }, [color])
+  const dimRef = useRef(dim)
+  useEffect(() => { dimRef.current = dim }, [dim])
 
   useEffect(() => {
     const cv = ref.current
@@ -76,7 +78,7 @@ export default function CodeRain({ color = '#7EE787' }) {
             ctx.fillText(l.t, c.x, y)
           } else {
             ctx.globalAlpha = 0.22
-            ctx.fillStyle = '#8B98A9'
+            ctx.fillStyle = dimRef.current
             ctx.fillText(l.t, c.x, y)
             // 키워드만 살짝 강조 (위치는 한 번만 계산해 둠)
             if (!l.kw) {
